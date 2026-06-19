@@ -735,21 +735,21 @@ header .container {
 }
 
 .hero-content.animate .hero-badge {
-    animation: land-badge 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both;
+    animation: land-badge 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.05s both;
 }
 
 .hero-content.animate h1 {
     background-size: 200% auto;
-    animation: land-up 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) 0.35s both,
-               land-shimmer 4s ease-in-out 0.35s infinite;
+    animation: land-up 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) 0.15s both,
+               land-shimmer 4s ease-in-out 0.15s infinite;
 }
 
 .hero-content.animate p {
-    animation: land-up 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) 0.55s both;
+    animation: land-up 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.25s both;
 }
 
 .hero-content.animate .hero-actions {
-    animation: land-up 0.65s cubic-bezier(0.22, 0.61, 0.36, 1) 0.75s both;
+    animation: land-up 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) 0.35s both;
 }
 
 .hero::after {
@@ -761,7 +761,7 @@ header .container {
     background: radial-gradient(ellipse at 50% 0%, rgba(var(--emerald-rgb), 0.08), transparent 55%);
     opacity: 0;
     transform-origin: top center;
-    animation: land-glow-in 1.8s ease 0.1s both;
+    animation: land-glow-in 0.8s ease 0.05s both;
 }
 
 .scroll-indicator {
@@ -779,7 +779,7 @@ header .container {
     text-transform: uppercase;
     opacity: 0;
     text-shadow: 0 0 12px var(--emerald-glow);
-    animation: bob-down 2s ease-in-out 1.5s infinite, land-fade 0.8s ease 1.5s both;
+    animation: bob-down 2s ease-in-out 0.6s infinite, land-fade 0.5s ease 0.6s both;
 }
 
 .scroll-indicator .line {
@@ -2101,7 +2101,7 @@ refreshThemeRgb();
             dist: Math.abs(st.y - viewCenter) + (Math.random() - 0.5) * vh * 0.35
         })).sort((a, b) => a.dist - b.dist);
         let idx = 0;
-        const totalFrames = 80;
+        const totalFrames = 40;
         const batchSize = Math.max(1, Math.floor(stars.length / totalFrames));
         function tick() {
             for (let i = 0; i < batchSize && idx < sorted.length; i++, idx++) {
@@ -2124,7 +2124,7 @@ refreshThemeRgb();
             .map(st => ({ st, dist: Math.abs(st.y - viewCenter) + (Math.random() - 0.5) * vh * 0.35 }))
             .sort((a, b) => a.dist - b.dist);
         let idx = 0;
-        const totalFrames = 300;
+        const totalFrames = 120;
         const batchSize = Math.max(1, Math.floor(stars.length / totalFrames));
         function tick() {
             for (let i = 0; i < batchSize && idx < sorted.length; i++, idx++) {
@@ -2398,15 +2398,15 @@ refreshThemeRgb();
             }
         }
 
-        if (time < 2) {
-            const veilA = Math.max(0, 1 - time / 2) * 0.65;
+        if (time < 0.8) {
+            const veilA = Math.max(0, 1 - time / 0.8) * 0.65;
             sctx.fillStyle = `rgba(4,20,13,${veilA})`;
             sctx.fillRect(0, 0, w, vh);
         }
 
         if (heroRevealTime >= 0) {
             const elapsed = time - heroRevealTime;
-            const duration = 5.0;
+            const duration = 2.0;
             const progress = Math.min(elapsed / duration, 1);
             if (progress < 1) {
                 const radius = vh * (0.06 + progress * 0.5);
@@ -2961,7 +2961,7 @@ window.addEventListener('load', () => {
     });
     setTimeout(() => {
         if (window.__heroReveal) window.__heroReveal();
-    }, 1800);
+    }, 600);
 });
 </script>
 </body>
