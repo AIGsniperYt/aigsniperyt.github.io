@@ -8,14 +8,14 @@ experiments — living in one folder and wired into the live catalogue.
 
 ## Live site
 
-- **https://aigsniperyt.github.io/**, served from `index.html` — a one-page SPA with an
+- **<https://aigsniperyt.github.io/>**, served from `index.html` — a one-page SPA with an
   interactive parallax starfield, a featured-projects grid, a filterable project
   browser (category and status filters: **MAJOR / Legacy / Deprecated / Reviving**), a
   latest-update feed, and a theme switcher (Forest / Alpine / Purple).
 
 ## Repo layout at a glance
 
-```
+``` txt
 index.html          The portfolio — every project is wired into its catalogue/featured data
 README.md           This file
 
@@ -43,7 +43,7 @@ means an older project slated to come back.
 ### Games
 
 | Project | Overview | Status |
-|---|---|---|
+| --- | --- | --- |
 | [Equilibrium](https://aigsniperyt.github.io/equilibrium/) | **MAJOR** — Open-world isometric souls-like action RPG: combat, exploration, custom ES6-module framework (formerly Elderwood) | |
 | [Simple Game V1](legacy/games/simple%20games/simple%20game/game.html) | 2D top-down shooter — mouse aiming + WASD, dodge and shoot enemies | legacy |
 | [Simple Game V2](legacy/games/simple%20games/simple%20game%20v2/game.html) | **MAJOR** — 2036-line zombie shooter: 5 weapons, XP leveling, powerups, dash, particles | legacy |
@@ -63,7 +63,7 @@ means an older project slated to come back.
 ### 3D & WebGL
 
 | Project | Overview | Status |
-|---|---|---|
+| --- | --- | --- |
 | [Flight Simulator](https://aigsniperyt.github.io/flight-sim/) | **MAJOR** — 3D flight sim: procedural terrain, realistic physics, chase camera | |
 | [WebGL Archive](webgl/index.html) | **MAJOR** — Hub for every flight-sim build and voxel world | |
 | [Voxel World V3](webgl/voxel%20v3/index.html) | Infinite procedural voxel world — chunking, fly mode, wireframe toggle | |
@@ -76,7 +76,7 @@ means an older project slated to come back.
 ### Tools & Utilities
 
 | Project | Overview | Status |
-|---|---|---|
+| --- | --- | --- |
 | [Lite Code Viewer](tools/lite-code-viewer/index.html) | Syntax-highlighted source browser for legacy/deprecated projects | |
 | [Online Paint](tools/paint/paint.html) | MS-Paint-style browser drawing tool | |
 | [Code Diff Checker](tools/comparison/index.html) | Side-by-side old-vs-new text/code diff with highlighting | |
@@ -95,7 +95,7 @@ means an older project slated to come back.
 ### Visualisations
 
 | Project | Overview | Status |
-|---|---|---|
+| --- | --- | --- |
 | [Visualisations Hub](visualisations/index.html) | **MAJOR** — A*, cars, cellular automata, foraging, noise, pirates, raycasting | |
 | [A* Pathfinding](visualisations/a-star/index.html) | Interactive shortest-path visualization on a grid | |
 | [Algorithms Visualizer](visualisations/algorithms/index.html) | Bubble / Selection / Insertion / Quick sort visualizer | |
@@ -107,7 +107,7 @@ means an older project slated to come back.
 ### Communication
 
 | Project | Overview | Status |
-|---|---|---|
+| --- | --- | --- |
 | [Discord Chat](https://aigsniperyt.github.io/online-server/) | **MAJOR** — Discord-style chat: E2E encryption, integrated chess, long-polling server | |
 | [AI Chatbot](PoC/chatbot/gemini-wrapper/index.html) | Gemini-powered chatbot web wrapper | |
 | [Gunr](legacy/games/gunr/index.html) | Proof-of-concept multiplayer attempt — seed of the full multiplayer system | legacy, revival |
@@ -115,7 +115,7 @@ means an older project slated to come back.
 ### Other
 
 | Project | Overview | Status |
-|---|---|---|
+| --- | --- | --- |
 | [Chess (Kaiser)](https://aigsniperyt.github.io/kaiser/) | **MAJOR** — Full chess engine: move validation, castling, en passant, genetic-AI weights | |
 | [Neuronet](https://aigsniperyt.github.io/neuronet-frontend/) | **MAJOR** — Local-first knowledge management system (backend + frontend) | |
 | [HTML Elements Ref](html/html.html) | Visual showcase of HTML elements with live examples | |
@@ -125,7 +125,7 @@ means an older project slated to come back.
 ### Deprecated
 
 | Project | Overview | Status |
-|---|---|---|
+| --- | --- | --- |
 | [Mining Game](legacy/games/mining/game.html) | Camera-follow mining sandbox with pickaxe resources | deprecated |
 | [Multiplayer Tic-Tac-Toe](legacy/games/tictactoe/index.html) | Online tic-tac-toe awaiting an opponent | deprecated |
 | [RPG (Survive)](legacy/games/rpg/game.html) | Top-down 2D survival RPG | deprecated |
@@ -139,7 +139,7 @@ means an older project slated to come back.
 Everything under [`legacy/games/`](legacy/games/):
 
 | Path | What it is |
-|---|---|
+| --- | --- |
 | `legacy/games/index.html` | Split-Screen hub — Simple Game version history |
 | `legacy/games/menu.html` | Games collection launcher |
 | `legacy/games/simple games/simple game/game.html` | Simple Game V1 |
@@ -174,7 +174,7 @@ Hub: [`webgl/index.html`](webgl/index.html). Own git repo. Fifteen flight-sim bu
 All internal links are wired to the current file tree:
 
 | Version | Entry | Notes |
-|---|---|---|
+| --- | --- | --- |
 | old | [`archive/portfolio/old/index.html`](archive/portfolio/old/index.html) | Original single-page card list (Games, Quote Gen, Bubbles, cursors...) |
 | v2 | [`archive/portfolio/v2/index.html`](archive/portfolio/v2/index.html) | Grid of cards — Elderwood lineage, tools, games |
 | v3 | [`archive/portfolio/v3/index.html`](archive/portfolio/v3/index.html) | Theme toggle + Project Constellation canvas |
