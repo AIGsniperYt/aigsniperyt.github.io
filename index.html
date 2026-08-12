@@ -2773,16 +2773,15 @@ toggle.addEventListener('click', () => {
    ============================================================ */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (!href || href === '#' || !href.startsWith('#')) return;
+        const target = document.querySelector(href);
+        if (!target) return;
         e.preventDefault();
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        const target = document.querySelector(targetId);
-        if (target) {
-            window.scrollTo({
-                top: target.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        }
+        window.scrollTo({
+            top: target.offsetTop - 80,
+            behavior: 'smooth'
+        });
     });
 });
 
