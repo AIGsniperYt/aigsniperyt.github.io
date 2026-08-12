@@ -1,17 +1,17 @@
-# monolith — Portfolio & Project Workspace
+# AIGsniper — Portfolio & Project Workspace
 
-The single codebase for the portfolio site, organised as a "monorepo-lite". The live
-site is served from [`index.html`](index.html); every project lives under its own
-folder and is wired into the portfolio catalogue.
+The single codebase behind [aigsniperyt.github.io](https://aigsniperyt.github.io/): the
+portfolio site itself plus every project — games, tools, visualisations and
+experiments — living in one folder and wired into the live catalogue.
 
-**Author:** AIGsniper (AIGsniperYt)
+**Author:** AIGsniper (AIGsniperYt) — <thahmimmustaq@gmail.com>
 
 ## Live site
 
-- GitHub Pages: **https://aigsniperyt.github.io/** — `index.html` is the entry point.
-  A single-page application with an interactive parallax starfield, a force-directed
-  "Project Constellation" graph, category filtering, featured cards, and a theme
-  switcher (Forest / Alpine / Purple).
+- **https://aigsniperyt.github.io/**, served from `index.html` — a one-page SPA with an
+  interactive parallax starfield, a featured-projects grid, a filterable project
+  browser (category and status filters: **MAJOR / Legacy / Deprecated / Reviving**), a
+  latest-update feed, and a theme switcher (Forest / Alpine / Purple).
 - `redirect.html` — legacy "site migration" stub; candidate for removal.
 
 ## Repo layout at a glance
@@ -33,7 +33,7 @@ PoC/                Proofs of concept (chatbot/gemini-wrapper, ...)
 output/             Build output / non-served extras (company landing page)
 html/               HTML elements visual reference (restored)
 
-chat/ chess/ equilibrium/ flight-sim/ neuronet/   own embedded git repos (see below)
+chat/ chess/ equilibrium/ flight-sim/ neuronet/ webgl/   own embedded git repos (see below)
 ```
 
 ## Project catalogue
@@ -187,7 +187,8 @@ All internal links are wired to the current file tree:
 The following folders are their own git repositories and are ignored by this
 monolith's `.gitignore`. They keep their own history, remotes, and ignore rules:
 
-`chat/`, `equilibrium/`, `flight-sim/`, `webgl/`, `neuronet/` (and `chess/`).
+`chat/`, `equilibrium/`, `flight-sim/`, `webgl/`, `neuronet/` (and `chess/`,
+`lab/C/rust_engine/`).
 
 They have both local entry points (e.g. `chat/index.html`, `chess/v2/ai.html`,
 `neuronet/frontend/index.html`) and live GitHub Pages deployments, which the
@@ -196,7 +197,7 @@ portfolio links to.
 ## Serving locally
 
 ```bash
-cd /home/aigsniper/Documents/website
+# from the repo root
 python3 -m http.server 8000
 # http://localhost:8000
 ```
