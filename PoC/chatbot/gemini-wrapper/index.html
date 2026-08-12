@@ -351,11 +351,14 @@
   </div>
 
   <script>
-    marked.setOptions({ gfm: true, breaks: true });
-
-    if (typeof location.hostname === "string" && location.hostname.endsWith("github.io")) {
+    function showPagesNotice() {
       document.getElementById("pagesToast").classList.add("show");
     }
+
+    const host = typeof location.hostname === "string" ? location.hostname : "";
+    if (host.endsWith("github.io")) showPagesNotice();
+
+    marked.setOptions({ gfm: true, breaks: true });
 
     const chatEl = document.getElementById("chat");
     const promptEl = document.getElementById("prompt");
@@ -412,7 +415,10 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ prompt, model: modelSelect.value })
         });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        if (!res.ok) {
+          if (res.status === 404 || res.status === 405) showPagesNotice();
+          throw new Error(`HTTP ${res.status}`);
+        }
 
         const reader = res.body.getReader();
         const decoder = new TextDecoder();
@@ -447,6 +453,7 @@
       } catch (err) {
         streaming = false;
         error = err.message;
+        showPagesNotice();
       }
       render();
       setLoading(false);
