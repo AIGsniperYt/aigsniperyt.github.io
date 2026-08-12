@@ -1,4 +1,4 @@
-# monolith — AIGsniper Portfolio & Project Workspace
+# monolith — Portfolio & Project Workspace
 
 The single codebase for the portfolio site, organised as a "monorepo-lite". The live
 site is served from [`index.html`](index.html); every project lives under its own
