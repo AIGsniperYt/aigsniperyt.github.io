@@ -1,0 +1,11 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/thahm/OneDrive/Documents/website/media/videos/test/480p15/partial_movie_files/PitchYawRoll/916705808_3200584201_2970731418.mp4'
+file 'file:C:/Users/thahm/OneDrive/Documents/website/media/videos/test/480p15/partial_movie_files/PitchYawRoll/4284030871_4115046924_1522438658.mp4'
+file 'file:C:/Users/thahm/OneDrive/Documents/website/media/videos/test/480p15/partial_movie_files/PitchYawRoll/4284030871_11463204_3072748082.mp4'
+file 'file:C:/Users/thahm/OneDrive/Documents/website/media/videos/test/480p15/partial_movie_files/PitchYawRoll/4284030871_2306346068_948379781.mp4'
+file 'file:C:/Users/thahm/OneDrive/Documents/website/media/videos/test/480p15/partial_movie_files/PitchYawRoll/4284030871_1392107425_357789387.mp4'
+file 'file:C:/Users/thahm/OneDrive/Documents/website/media/videos/test/480p15/partial_movie_files/PitchYawRoll/4284030871_3377020230_1304959979.mp4'
+file 'file:C:/Users/thahm/OneDrive/Documents/website/media/videos/test/480p15/partial_movie_files/PitchYawRoll/4284030871_626902573_4223921856.mp4'
+file 'file:C:/Users/thahm/OneDrive/Documents/website/media/videos/test/480p15/partial_movie_files/PitchYawRoll/4284030871_4207378509_1956454148.mp4'
+file 'file:C:/Users/thahm/OneDrive/Documents/website/media/videos/test/480p15/partial_movie_files/PitchYawRoll/4284030871_1158398234_2540396360.mp4'
+file 'file:C:/Users/thahm/OneDrive/Documents/website/media/videos/test/480p15/partial_movie_files/PitchYawRoll/4284030871_548731573_2734730626.mp4'

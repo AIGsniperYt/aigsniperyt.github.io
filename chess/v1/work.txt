@@ -1,0 +1,1 @@
+now do checks so when king is in check, something must happen to stop the king from being in check, if there are none, it is mate

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bubble Pop Game</title>
+    <style>
+        /* Add CSS styles for the bubbles here */
+        body {
+            background-color: black;
+            overflow: hidden; /* Prevent scrollbars */
+            margin: 0;
+            padding: 0;
+        }
+
+        .bubble-container {
+            position: absolute;
+        }
+
+        .bubble {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out; /* Add a scale effect */
+            position: relative;
+        }
+
+        .hitbox {
+            width: 300px; /* Hitbox is 30px larger than the visible bubble */
+            height: 300px;
+            position: absolute;
+            border-radius: 50%;
+            background-color: transparent; /* Transparent hitbox */
+            top: 50%; /* Center hitbox vertically */
+            left: 50%; /* Center hitbox horizontally */
+            transform: translate(-50%, -50%); /* Center the hitbox over the bubble */
+            color: rgb(255, 230, 0)
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const bubbleColors = [
+            'rgba(255, 0, 0, 0.7)',   // 0 Red with transparency
+            'rgba(0, 255, 0, 0.7)',   // 1 Green with transparency
+            'rgba(0, 0, 255, 0.7)',   // 2 Blue with transparency
+            'rgba(255, 255, 0, 0.7)', // 3 Yellow with transparency
+            'rgba(255, 0, 255, 0.7)',  // 4 Magenta with transparency
+            'rgba(255, 165, 0, 0.7)'  // 5 Magenta with transparency
+            // Add or remove colors as needed with the desired transparency
+        ];
+
+        let RandomColor = true; // Set to true for random colors, false for default color
+        let DefaultColor = bubbleColors[3]; // Set your default color with 0.7 alpha (e.g., red with transparency)
+        let autopilot = true; // Set to true to enable autopilot, false to disable
+
+        // Function to create a bubble and its hitbox and add them to the page
+        function createBubble(x) {
+            const bubbleContainer = document.createElement('div');
+            bubbleContainer.className = 'bubble-container';
+            bubbleContainer.style.left = x + 'px';
+            bubbleContainer.style.bottom = '-100px'; // Start the bubbles below the screen
+
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+
+            let bubbleColor; // Declare a variable to store the bubble color
+
+            if (RandomColor) {
+                // If RandomColor is true, select a random color
+                bubbleColor = bubbleColors[Math.floor(Math.random() * bubbleColors.length)];
+            } else {
+                // If RandomColor is false, use the DefaultColor
+                bubbleColor = DefaultColor;
+            }
+
+            bubble.style.backgroundColor = bubbleColor;
+
+            const hitbox = document.createElement('div');
+            hitbox.className = 'hitbox';
+
+            bubbleContainer.appendChild(bubble);
+            bubbleContainer.appendChild(hitbox);
+
+            document.body.appendChild(bubbleContainer);
+
+            // Animate the bubble moving upwards
+            let distance = 0;
+            const animationInterval = setInterval(() => {
+                distance += 4; // Adjust the speed
+                bubbleContainer.style.bottom = distance + 'px';
+                if (distance >= window.innerHeight) {
+                    clearInterval(animationInterval);
+                    bubbleContainer.remove();
+                }
+            }, 10);
+
+            // Remove the bubble when the hitbox is hovered over and add a cool popping effect
+            hitbox.addEventListener('mouseenter', () => {
+                bubble.style.transform = 'scale(1.5)';
+                setTimeout(() => {
+                    bubbleContainer.remove();
+                }, 100); // Remove after 200ms (cool popping effect time)
+            });
+
+            if (autopilot) {
+                setTimeout(() => {
+                    bubble.style.transform = 'scale(1.5)';
+                    setTimeout(() => {
+                        bubbleContainer.remove();
+                    }, 200);
+                }, 1000); // Adjust the time interval (in milliseconds) for autopilot
+            }
+        }
+
+        // Function to spawn bubbles one by one
+        function spawnBubble() {
+            const screenWidth = window.innerWidth;
+            const randomX = Math.random() * (screenWidth - 80); // Adjust for bubble size
+
+            createBubble(randomX);
+        }
+
+        // Continue spawning bubbles one by one at a quicker rate (500 milliseconds)
+        setInterval(spawnBubble, 50);
+    </script>
+</body>
+</html>

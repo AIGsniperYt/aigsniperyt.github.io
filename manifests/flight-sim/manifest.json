@@ -1,0 +1,30 @@
+{
+  "$schema": 1,
+  "project": {
+    "name": "Flight Simulator",
+    "description": "Browser-based 3D flight simulator built with Three.js — procedurally generated terrain, realistic flight physics, and a chase camera, now with full touch controls for phones and tablets.",
+    "url": "https://aigsniperyt.github.io/flight-sim/",
+    "repo": "https://github.com/AIGsniperYt/flight-sim",
+    "category": "3D",
+    "tags": ["three.js", "webgl", "flight-simulator", "procedural-terrain", "simulation"]
+  },
+  "release": {
+    "version": "v8.1",
+    "date": "2026-06-24",
+    "changelog": [
+      "added: on-screen touch controls for phones and tablets — virtual joystick for pitch/roll plus FIRE, LOCK, and BRAKE buttons",
+      "added: settings and help menu (gear button) listing all controls, with automatic touch detection",
+      "added: crashes now deliver a violent two-stage shake — a sharp impact jolt, then a low structural rumble with a roll twist",
+      "added: every explosion — missile hits, ground impacts, enemy kills — rattles the camera, with force fading smoothly over distance",
+      "changed: faster impacts hit harder — crash shake scales with impact speed, from a gentle bump to a full slam",
+      "changed: ground features appear twice as frequently, so flying at cruise speed feels dramatically faster",
+      "fixed: orbiting the camera around the plane no longer causes terrain-loading stutter or frame drops",
+      "fixed: terrain-loading deadlock resolved — terrain falls back gracefully instead of freezing or leaving chunks invisible",
+      "fixed: sharper, clearer image at better frame rates — antialiasing and the cinematic look now run in a single pass",
+      "fixed: smoother frames during explosions and dogfights from general CPU optimisations"
+    ]
+  },
+  "media": {
+    "image": ""
+  }
+}

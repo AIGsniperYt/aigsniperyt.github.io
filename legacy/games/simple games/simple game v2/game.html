@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Game V1</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            position: relative; /* Add this to make sure absolute positioning is relative to the body */
+        }
+        .weapon-card {
+            margin-top: 20px;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: left;
+        }
+
+        .weapon-card h2 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        .weapon-card p {
+            margin: 10px 0;
+        }
+
+        #settings-button {
+            position: fixed; /* Position the button relative to the viewport */
+            top: 20px; /* Adjust the distance from the top */
+            right: 20px; /* Adjust the distance from the right */
+            z-index: 9999; /* Ensure the button is above other elements */
+            background: none; /* Remove background color */
+            border: none; /* Remove border */
+            cursor: pointer; /* Set cursor to pointer */
+        }
+
+        #settings-button img {
+            width: 30px; /* Adjust the size of the icon */
+            height: 30px;
+        }
+
+
+        #settings-menu {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: left;
+            user-select: none;
+        }
+
+        #particles-toggle {
+            cursor: pointer;
+            margin-bottom: 10px;
+            user-select: none;
+        }
+
+        #particles-toggle span {
+            color: green;
+        }
+
+        #particles-toggle.off span {
+            color: red;
+        }
+
+        #health-energy-container {
+            display: flex;
+            justify-content: space-between;
+            width: 80vw; /* Adjust the width as needed */
+            position: absolute;
+            bottom: 50px; /* Adjust position to your liking */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #health-bar,
+        #energy-bar {
+            width: 40%; /* Adjust the width as needed */
+            height: 30px;
+            background-color: gray;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        #health-fill {
+            height: 100%;
+            width: 0;
+            background-color: #00C957; /* Red color for health bar */
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+
+        #energy-fill {
+            height: 100%;
+            width: 0;
+            background-color: #FFC04D; /* Green color for energy bar */
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+
+
+        #health-text,
+        #energy-text {
+            position: relative;
+            bottom: 23px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: Arial, sans-serif;
+            color: #1E1E1E;
+            font-size: 16px;
+            font-weight: bolder;
+            transition: opacity 0.5s ease;
+            user-select: none;
+            width: 100%; /* Ensure the text takes the full width of the bar */
+            text-align: center; /* Center align the text */
+        }
+
+
+        #xp-bar {
+            width: 80vw; /* Adjust the width as needed */
+            height: 30px;
+            background-color: gray;
+            overflow: hidden;
+            position: absolute;
+            bottom: 10px; /* Adjust position to your liking */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #xp-fill {
+            height: 100%;
+            width: 0;
+            background-color: #FFD700;
+            transition: width 0.5s ease;
+        }
+
+        #xp-text {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: Arial, sans-serif;
+            color: #1E1E1E;
+            font-size: 16px;
+            font-weight: bolder;
+            transition: opacity 0.5s ease;
+            user-select: none;
+        }
+
+        #health-bar {
+            margin-right: 5px;
+        }
+
+        .icon {
+            width: 22px; /* Adjust icon size */
+            height: 22px;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        #health-bar {
+            position: relative; /* Ensure the bar is the positioning context for the icon */
+            margin-right: 5px;
+        }
+
+        #energy-bar {
+            position: relative; /* Ensure the bar is the positioning context for the icon */
+        }
+
+        #health-icon {
+            background-image: url('shield-icon.png'); /* Replace with health icon */
+            position: absolute;
+            top: 50%; /* Adjust vertically */
+            transform: translateY(-50%);
+            left: 10px; /* Adjust distance from health bar */
+        }
+
+        #energy-icon {
+            background-image: url('energy-icon.png'); /* Replace with energy icon */
+            position: absolute;
+            top: 50%; /* Adjust vertically */
+            transform: translateY(-50%);
+            left: 10px; /* Adjust distance from energy bar */
+        }
+
+        #xp-icon {
+            background-image: url('xp-icon.png'); /* Replace with XP icon */
+            position: absolute;
+            top: 50%; /* Adjust vertically */
+            transform: translateY(-50%);
+            left: 10px; /* Adjust distance from XP bar */
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <canvas id="game-container"></canvas>
+
+    <button id="settings-button" onclick="settings()">
+        <img src="settings-icon.png" alt="Settings">
+    </button>
+
+
+    <div id="settings-menu">
+        <div id="particles-toggle" onclick="toggleParticles()">
+            Particles: <span id="particles-status">On</span>
+        </div>
+        <div class="weapon-card" id="weapon-card" style="display: block;">
+            <h2 id="weapon-name"></h2>
+            <p id="weapon-description"></p>
+            <p id="weapon-damage"></p>
+            <p id="weapon-firerate"></p>
+            <p id="weapon-cost"></p>
+            <p id="weapon-pen"></p>
+        </div>
+    </div>
+
+    <div id="health-energy-container">
+        <div id="health-bar">
+            <div id="health-fill"></div>
+            <div id="health-text"></div>
+            <div id="health-icon" class="icon"></div> <!-- Health icon -->
+        </div>
+
+        <div id="energy-bar">
+            <div id="energy-fill"></div>
+            <div id="energy-text"></div>
+            <div id="energy-icon" class="icon"></div> <!-- Energy icon -->
+        </div>
+    </div>
+
+    <div id="xp-bar">
+        <div id="xp-fill"></div>
+        <div id="xp-text"></div>
+        <div id="xp-icon" class="icon"></div> <!-- XP icon -->
+    </div>
+
+    <script src="game.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving a Character</title>
+    <style>
+        body {
+            background-color: #333;
+        }
+
+        #player {
+            width: 50px;
+            height: 50px;
+            background-color: #98FF98;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .backlinks {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .backlinks a {
+            text-decoration: none;
+            color: #98FF98;
+            margin: 5px;
+            transition: color 0.3s;
+        }
+
+        .backlinks a:hover {
+            color: #77CC77;
+        }
+    </style>
+</head>
+<body>
+    <div id="player"></div>
+    <script>
+        const player = document.getElementById("player");
+
+        let x = 0;
+        let y = 0;
+
+        // Create boolean flags to track arrow key states
+        let isArrowUpPressed = false;
+        let isArrowDownPressed = false;
+        let isArrowLeftPressed = false;
+        let isArrowRightPressed = false;
+
+        function updatePosition() {
+            player.style.left = x + "px";
+            player.style.top = y + "px";
+        }
+
+        // Event listeners for keydown and keyup events
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowUp") {
+                isArrowUpPressed = true;
+            } else if (event.key === "ArrowDown") {
+                isArrowDownPressed = true;
+            } else if (event.key === "ArrowLeft") {
+                isArrowLeftPressed = true;
+            } else if (event.key === "ArrowRight") {
+                isArrowRightPressed = true;
+            }
+        });
+
+        document.addEventListener("keyup", (event) => {
+            if (event.key === "ArrowUp") {
+                isArrowUpPressed = false;
+            } else if (event.key === "ArrowDown") {
+                isArrowDownPressed = false;
+            } else if (event.key === "ArrowLeft") {
+                isArrowLeftPressed = false;
+            } else if (event.key === "ArrowRight") {
+                isArrowRightPressed = false;
+            }
+        });
+
+        // Continuously move the player if an arrow key is held down
+        function movePlayer() {
+            if (isArrowUpPressed) {
+                y -= 10;
+            }
+            if (isArrowDownPressed) {
+                y += 10;
+            }
+            if (isArrowLeftPressed) {
+                x -= 10;
+            }
+            if (isArrowRightPressed) {
+                x += 10;
+            }
+
+            updatePosition();
+
+            // Use requestAnimationFrame for smooth animation
+            requestAnimationFrame(movePlayer);
+        }
+
+        // Start the continuous movement loop
+        requestAnimationFrame(movePlayer);
+
+    </script>
+    <div class="backlinks">
+        <a href="../../index.html">Back to Landing Page</a>
+        <a href="../../../index.html">Back to Portfolio</a>
+    </div>
+</body>
+</html>

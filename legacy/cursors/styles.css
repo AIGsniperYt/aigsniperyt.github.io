@@ -1,0 +1,77 @@
+
+/* styles.css */
+
+/* Set background color and font color for dark mode */
+body {
+  background-color: #333;
+  color: #f9f9f9;
+}
+
+
+/* Style the cursor examples for dark mode */
+.cursor-example {
+  border: 1px solid #666;
+  background-color: #444;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  padding: 7px 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  width: 800px;
+}
+
+/* Style the cursor type for dark mode */
+.cursor-type {
+  font-weight: bold;
+  font-size: 14px;
+  color: #f9f9f9;
+}
+
+/* Style the cursor code for dark mode */
+.cursor-code {
+  font-family: monospace;
+  background-color: #555;
+  padding: 2px 5px;
+}
+
+/* Style the copy button for dark mode */
+.copy-button {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #1abc9c;
+  text-decoration: none;
+  font-size: 15px;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+}
+.copy-button:hover {
+  text-decoration: none;
+}
+
+/* Style for the "Back to Portfolio" link */
+.back-to-portfolio {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.back-to-portfolio a {
+  color: #98FF98;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+}
+
+.back-to-portfolio a:hover {
+  text-decoration: none;
+}
+
+/* Style for the copyright section */
+.copyright {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  margin-top: 18px;
+  margin-bottom: 40px;
+  color: #fff;
+  font-size: 16px;
+}
+

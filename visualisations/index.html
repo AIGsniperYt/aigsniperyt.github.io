@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualisations Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #070d0a;
+            --panel: #0d1611;
+            --panel2: #111d16;
+            --border: #1c2e23;
+            --text: #e8f5ee;
+            --muted: #8ba79a;
+            --emerald: #4cff9a;
+            --emerald-dim: #2fa265;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Segoe UI", system-ui, sans-serif;
+            min-height: 100vh;
+            padding: 48px 24px;
+            background-image: radial-gradient(circle at 20% 0%, rgba(76, 255, 154, 0.05), transparent 40%);
+        }
+        header {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2rem;
+            letter-spacing: 0.04em;
+            margin-bottom: 10px;
+        }
+        header h1 span { color: var(--emerald); }
+        header p { color: var(--muted); font-size: 0.95rem; }
+        .grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+        .card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: var(--emerald-dim);
+            background: var(--panel2);
+        }
+        .card .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            background: rgba(76, 255, 154, 0.1);
+            color: var(--emerald);
+            font-size: 1.1rem;
+        }
+        .card h3 { font-size: 1rem; font-weight: 600; }
+        .card p { color: var(--muted); font-size: 0.82rem; line-height: 1.45; }
+        .card .open { margin-top: auto; font-size: 0.78rem; color: var(--emerald-dim); }
+        .back { text-align: center; margin-top: 36px; }
+        .back a {
+            color: var(--emerald);
+            text-decoration: none;
+            font-size: 0.85rem;
+            border: 1px solid var(--border);
+            padding: 8px 18px;
+            border-radius: 999px;
+            transition: background 0.15s ease;
+        }
+        .back a:hover { background: rgba(76, 255, 154, 0.08); }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Visualisations <span>Hub</span></h1>
+        <p>Algorithms, simulations, procedural generation, and 3D experiments.</p>
+    </header>
+
+    <div class="grid">
+        <a class="card" href="a-star/index.html">
+            <div class="icon"><i class="fas fa-route"></i></div>
+            <h3>A* Pathfinding</h3>
+            <p>Interactive visualization of how the A* algorithm finds the shortest path on a grid.</p>
+            <div class="open">Open <i class="fa-solid fa-arrow-right" style="font-size:0.65rem"></i></div>
+        </a>
+        <a class="card" href="algorithms/index.html">
+            <div class="icon"><i class="fas fa-sort-amount-down"></i></div>
+            <h3>Sorting &amp; Searching Visualizer</h3>
+            <p>Bubble, Selection, Insertion, and Quick Sort — animated step by step.</p>
+            <div class="open">Open <i class="fa-solid fa-arrow-right" style="font-size:0.65rem"></i></div>
+        </a>
+        <a class="card" href="autocar/index.html">
+            <div class="icon"><i class="fas fa-car"></i></div>
+            <h3>Pointing Navigation Simulator</h3>
+            <p>Self-driving car simulation with sensor-based obstacle avoidance.</p>
+            <div class="open">Open <i class="fa-solid fa-arrow-right" style="font-size:0.65rem"></i></div>
+        </a>
+        <a class="card" href="celllular automata/index.html">
+            <div class="icon"><i class="fas fa-draw-polygon"></i></div>
+            <h3>Procedural Cave Generator</h3>
+            <p>Cellular automata-based dungeon and cave generation with noise density controls.</p>
+            <div class="open">Open <i class="fa-solid fa-arrow-right" style="font-size:0.65rem"></i></div>
+        </a>
+        <a class="card" href="foraging/index.html">
+            <div class="icon"><i class="fas fa-bug"></i></div>
+            <h3>Foraging Simulation</h3>
+            <p>Agent-based ants that find food and communicate via pheromone trails.</p>
+            <div class="open">Open <i class="fa-solid fa-arrow-right" style="font-size:0.65rem"></i></div>
+        </a>
+        <a class="card" href="perlin noise/v1/index.html">
+            <div class="icon"><i class="fas fa-wave-square"></i></div>
+            <h3>Simplex Noise Demo</h3>
+            <p>How noise functions generate coherent, organic-looking patterns.</p>
+            <div class="open">Open <i class="fa-solid fa-arrow-right" style="font-size:0.65rem"></i></div>
+        </a>
+        <a class="card" href="pirate/index.html">
+            <div class="icon"><i class="fas fa-ship"></i></div>
+            <h3>Pirate Ship</h3>
+            <p>3D pirate ship simulation with vertex-based water waves in Three.js.</p>
+            <div class="open">Open <i class="fa-solid fa-arrow-right" style="font-size:0.65rem"></i></div>
+        </a>
+        <a class="card" href="raycasting/raycasting.html">
+            <div class="icon"><i class="fas fa-eye"></i></div>
+            <h3>Raycasting Engine</h3>
+            <p>First-person raycasting renderer with wall detection from a 2D map.</p>
+            <div class="open">Open <i class="fa-solid fa-arrow-right" style="font-size:0.65rem"></i></div>
+        </a>
+        <a class="card" href="simplex/index.html">
+            <div class="icon"><i class="fas fa-chart-area"></i></div>
+            <h3>3D Simplex Noise Grid</h3>
+            <p>Terrain height map rendered in Three.js with simplex noise, viewable from any angle.</p>
+            <div class="open">Open <i class="fa-solid fa-arrow-right" style="font-size:0.65rem"></i></div>
+        </a>
+    </div>
+
+    <div class="back"><a href="../index.html">Back to portfolio</a></div>
+</body>
+</html>

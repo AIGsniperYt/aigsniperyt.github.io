@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotating Square Game</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        #square {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            position: relative;
+        }
+
+        .bullet {
+            width: 20px;
+            height: 10px;
+            background-color: yellow; /* Updated color to yellow */
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div id="square"></div>
+    </div>
+    <script>
+        let rotation = 0;
+        let speed = 5; // Adjust speed as needed
+
+        // Create a central bullet initially
+        const centralBullet = createBullet();
+
+        document.addEventListener('keydown', function (event) {
+            const square = document.getElementById('square');
+
+            // Rotate anticlockwise with 'W'
+            if (event.key === 'w') {
+                rotation -= 10;
+                square.style.transform = `rotate(${rotation}deg)`;
+            }
+
+            // Rotate clockwise with 'S'
+            if (event.key === 's') {
+                rotation += 10;
+                square.style.transform = `rotate(${rotation}deg)`;
+            }
+
+            // Shoot with 'E'
+            if (event.key === 'e') {
+                // Fire the central bullet in its current direction
+                fireBullet(centralBullet, rotation);
+            }
+        });
+
+        function createBullet() {
+            const bullet = document.createElement('div');
+            bullet.className = 'bullet';
+            document.body.appendChild(bullet);
+            return bullet;
+        }
+
+        function fireBullet(bullet, currentRotation) {
+            // Set initial position and rotation of the bullet
+            const square = document.getElementById('square');
+            const squareRect = square.getBoundingClientRect();
+            const bulletRect = bullet.getBoundingClientRect();
+
+            // Calculate angle in radians
+            const angleRad = (currentRotation * Math.PI) / 180;
+
+            // Calculate velocity components
+            const vx = Math.cos(angleRad) * speed;
+            const vy = Math.sin(angleRad) * speed;
+
+            // Set initial position of the bullet
+            bullet.style.left = squareRect.left + squareRect.width / 2 - bulletRect.width / 2 + 'px';
+            bullet.style.top = squareRect.top + squareRect.height / 2 - bulletRect.height / 2 + 'px';
+
+            // Reset bullet rotation to 0
+            bullet.style.transform = `rotate(0deg)`;
+
+            // Move the bullet in the calculated direction
+            function moveBullet() {
+                const bulletRect = bullet.getBoundingClientRect();
+                bullet.style.left = bulletRect.left + vx + 'px';
+                bullet.style.top = bulletRect.top + vy + 'px';
+                requestAnimationFrame(moveBullet);
+            }
+
+            moveBullet();
+        }
+    </script>
+</body>
+</html>

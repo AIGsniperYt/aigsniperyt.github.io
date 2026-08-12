@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #8BF49E, #F9F586, #ff7c8f);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f08080
+}
+
+canvas {
+    margin: auto;
+    display: block;
+    border: 7px solid rgba(0, 140, 255, 0.219); /* Add a black border */
+    border-radius: 15px; /* Set the border-radius for rounded corners */
+}
+

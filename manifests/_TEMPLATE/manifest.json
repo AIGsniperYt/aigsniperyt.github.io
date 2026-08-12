@@ -1,0 +1,23 @@
+{
+  "$schema": 1,
+  "project": {
+    "name": "Project Name",
+    "description": "One-line pitch shown on the portfolio.",
+    "url": "https://aigsniperyt.github.io/repo-name/",
+    "repo": "https://github.com/you/repo-name",
+    "category": "Games",
+    "tags": ["tag1", "tag2", "tag3"]
+  },
+  "release": {
+    "version": "V1",
+    "date": "2026-01-01",
+    "changelog": [
+      "added: what's new, from a player/user perspective",
+      "changed: how something behaves differently now",
+      "fixed: what was broken that's now working"
+    ]
+  },
+  "media": {
+    "image": "./cover.png"
+  }
+}

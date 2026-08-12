@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split-Screen Project</title>
+    <style>
+        /* Center the link vertically and horizontally */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Center vertically */
+            background-color: #333; /* Dark gray background color */
+            margin: 0;
+        }
+
+        a {
+            font-family: consolas;
+            position: relative;
+            display: inline-block;
+            padding: 15px 30px;
+            color: #2196f3;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-decoration: none;
+            font-size: 24px;
+            overflow: hidden;
+        }
+
+        a:hover {
+            color: #255784;
+        }
+
+        a span {
+            position: absolute;
+            display: block;
+        }
+
+        a span:nth-child(1) {
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: #2196f3;
+            transition: left 1s;
+        }
+
+        a span:nth-child(2) {
+            top: -100%;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #2196f3);
+            transition: top 1s;
+        }
+
+        a span:nth-child(3) {
+            bottom: 0;
+            right: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(270deg, transparent, #2196f3);
+            transition: right 1s;
+            transition-delay: 0.5s;
+        }
+
+        a span:nth-child(4) {
+            bottom: -100%;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #2196f3);
+            transition: bottom 1s;
+        }
+
+        a:hover span:nth-child(1) {
+            left: 100%;
+            transition: none;
+        }
+
+        a:hover span:nth-child(2) {
+            top: 100%;
+            transition: none;
+        }
+
+        a:hover span:nth-child(3) {
+            right: 100%;
+            transition: none;
+        }
+
+        a:hover span:nth-child(4) {
+            bottom: 100%;
+            transition: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Link with play icon, no hover effects -->
+    <a href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Play Game
+    </a>
+</body>
+</html>

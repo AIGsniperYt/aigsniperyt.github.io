@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split-Screen Project</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #2c2c2c; /* Dark gray-black background color */
+            color: #37B8B8; /* White text color */
+        }
+
+        .right-box {
+            flex: 1;
+            padding: 7vh 6vw;
+            margin: 7vh 6vw;
+            overflow: auto;
+            border-radius: 20px;
+            background-color: #333; /* Dark gray right side content background color */
+        }
+
+        .left-box {
+            flex: 1;
+            padding: 7vh 6vw;
+            margin: 7vh 6vw;
+            overflow: auto;
+            border-radius: 20px;
+            background-color: #333; /* Dark gray right side content background color */
+        }
+
+        /* Customize styles for the bars */
+        .bar {
+            cursor: pointer;
+            margin-bottom: 10px;
+            background-color: #2c2c2c; /* Cyan left side bar color */
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+
+
+        }
+
+        .bar:hover {
+            background-color: #00FFFF;
+            color: #006B6B;
+            /* Cyan highlight color on hover */
+        }
+
+        /* Add more custom styles as needed */
+        /* Style the game links */
+        a {
+            font-weight: bold; /* Make the text bold */
+            font-family: Arial, sans-serif; /* Use a sans-serif font like Arial */
+            color: cyan; /* Set the text color to cyan */
+            text-decoration: none; /* Remove underlines from links */
+            transition: color 0.3s; /* Smooth color transition for hover effect */
+            text-shadow: 0 0 10px #00FFFF; /* Neon text shadow */
+        }
+
+        /* Style links on hover */
+        a:hover {
+            text-shadow: 0 0 20px #00FFFF; /* Expand the neon text shadow on hover */
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="left-box">
+        <div class="bar" data-version="Plane Game">Plane Game</div>
+        <div class="bar" data-version="1v1">1v1</div>
+        <div class="bar" data-version="Mining">Mining</div>
+        <div class="bar" data-version="Paint">Paint</div>
+        <div class="bar" data-version="Alien">Galactic Guardian</div>
+
+
+    </div>
+    <div class="right-box">
+        <!-- Content for the right box will be inserted dynamically with JavaScript -->
+    </div>
+
+    <script>
+        // JavaScript code for handling bar clicks and updating the right box
+        const bars = document.querySelectorAll('.bar');
+        const rightBox = document.querySelector('.right-box');
+
+        const gameVersions = [
+            {
+                version: 'Plane Game',
+                description: "In this game, there are two planes. one spawns at the left when the game is started and the other spawns on the right. If you crash into each other, you both die. You can fire guns and missiles. Try to kill the other player!",
+                issues: [
+                    {
+                        type: 'Plane 1 Controls - ',
+                        description: "<br>'W' to rotate anti-clockwise <br>'S' to rotate clockwise <br>'Q' to shoot your gun <br>'E' to shoot missiles",
+                    },
+                     {
+                        type: 'Plane 2 Controls - ',
+                        description: "<br>'W' to rotate anti-clockwise <br>'S' to rotate clockwise <br>'Q' to shoot your gun <br>'E' to shoot missiles",
+                    },
+                    {
+                        type: 'PS - ',
+                        description: "<br>Working on campaign mode where you bomb t...",
+                    },
+                ],
+                gameLink: 'planegame/game.html'
+            },
+            {
+                version: '1v1',
+                description: "In this game, there are two players, one spawning on the left and another spawning on the right. The left is player 1 and right is player 2. You can shoot bullets at each other that each deal 1 damage. Try to kill the other player by landing 15 hits! Good luck!",
+                issues: [
+                    {
+                        type: 'Player 1 Controls - ',
+                        description: "<br>WASD to move. <br>'E' to shoot",
+                    },
+                    {
+                        type: 'Player 2 Controls - ',
+                        description: "<br>Arrow keys to move. '0' / 'Ins' to shoot.",
+                    },
+                ],
+                gameLink: '1v1/game.html'
+            },
+            {
+                version: "Mining",
+                description: "Its not been made yet, but the concept in mind is a player with camera follow can move around a map to use a pickaxe to mine resources.",
+                issues: [
+                ],
+                gameLink: 'mining/game.html'
+            },
+            {
+                version: "Paint",
+                description: "Basic app but online. I'm trying to make a better version of microsoft paint but online. It shouldn't be too hard as Microsoft Paint is terrible anyways. Atleast my app doesn't look look a low resolution pixelized picture.",
+                issues: [
+                    {
+                        type: 'It is VERY self-explanatory.',
+                        description: "",
+                    },
+                ],
+                gameLink: '../../tools/paint/paint.html'
+            },
+            {
+                version: "Alien",
+                description: "In the distant future, Earth has become the last bastion of peace in the galaxy. Unknown to humanity, an alien force called the Xyloids is plotting to invade and conquer. Your square, equipped with advanced weaponry, is Earth's last line of defense. As the Galactic Guardian, you must thwart the alien invasion and save the planet.",
+                issues: [
+                    {
+                        type: 'Controls - ',
+                        description: "<br>WASD to move<br>Mouse to aim<br>Click to shoot",
+                    },
+                ],
+                gameLink: 'alien/spaceshooter.html'
+            },
+        ];
+
+        bars.forEach(bar => {
+            bar.addEventListener('click', () => {
+                const versionName = bar.getAttribute('data-version');
+                const versionData = gameVersions.find(v => v.version === versionName);
+
+                if (versionData) {
+                    // Generate the HTML for the right box with desired formatting
+                    rightBox.innerHTML = `
+                        <h2>${versionData.version}</h2>
+                        <p>${versionData.description}</p>
+                        <h3>Information:</h3>
+                        <ul>
+                            ${versionData.issues.map(issue => `
+                                <li>
+                                    <strong>${issue.type}</strong> ${issue.description}
+                                </li>
+                            `).join('')}
+                        </ul>
+                        <a href="${versionData.gameLink}" target="_blank">Play the Game</a> <!-- Add this line -->
+                    `;
+                }
+            });
+        });
+    </script>
+
+
+</body>
+</html>

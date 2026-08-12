@@ -1,0 +1,12 @@
+{
+    "project": "Chess AI (Kaiser)",
+    "version": "v1.0.0",
+    "date": "2026-08-10",
+    "image": "",
+    "description": "A genetic algorithm-based chess bot that uses natural selection to evolve its evaluation weights.",
+    "changelog": [
+        "Genetic algorithm evolution engine",
+        "Web Worker-backed engine keeps the UI responsive"
+    ],
+    "url": "https://aigsniperyt.github.io/kaiser/"
+}

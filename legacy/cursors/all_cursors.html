@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .cursor-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cursor-example {
+    display: flex;
+    margin-bottom: 10px;
+  }
+
+  .cursor-type {
+    flex: 1;
+  }
+
+  .cursor-code {
+    font-family: monospace;
+    background-color: #f0f0f0;
+    padding: 2px 5px;
+  }
+
+  .copy-button {
+    margin-left: 10px;
+    cursor: pointer;
+    color: #1abc9c;
+    text-decoration: none;
+  }
+
+</style>
+
+<link rel="stylesheet" href="styles.css">
+<script>
+  function copyCodeToClipboard(code) {
+    const tempElement = document.createElement("textarea");
+    tempElement.value = code;
+    document.body.appendChild(tempElement);
+    tempElement.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempElement);
+  }
+</script>
+</head>
+<body>
+<div class="cursor-container">
+  <h2>The cursor Property</h2>
+  <p>Click the copy button to copy the code for each cursor type.</p>
+
+  <div class="cursor-example">
+    <div class="cursor-type" style="cursor: auto">auto</div>
+    <div class="cursor-code">
+      &lt;span style="cursor: auto"&gt;auto&lt;/span&gt;
+      <span class="copy-button" onclick="copyCodeToClipboard('&lt;span style=&quot;cursor: auto&quot;&gt;auto&lt;/span&gt;')">Copy</span>
+    </div>
+  </div>
+
+  <div class="cursor-example">
+    <div class="cursor-type" style="cursor: crosshair">crosshair</div>
+    <div class="cursor-code">
+      &lt;span style="cursor: crosshair"&gt;crosshair&lt;/span&gt;
+      <span class="copy-button" onclick="copyCodeToClipboard('&lt;span style=&quot;cursor: crosshair&quot;&gt;crosshair&lt;/span&gt;')">Copy</span>
+    </div>
+  </div>
+
+  <div class="cursor-example">
+    <div class="cursor-type" style="cursor: default">default</div>
+    <div class="cursor-code">
+      &lt;span style="cursor: default"&gt;default&lt;/span&gt;
+      <span class="copy-button" onclick="copyCodeToClipboard('&lt;span style=&quot;cursor: default&quot;&gt;default&lt;/span&gt;')">Copy</span>
+    </div>
+  </div>
+
+  <div class="cursor-example">
+    <div class="cursor-type" style="cursor: e-resize">e-resize</div>
+    <div class="cursor-code">
+      &lt;span style="cursor: e-resize"&gt;e-resize&lt;/span&gt;
+      <span class="copy-button" onclick="copyCodeToClipboard('&lt;span style=&quot;cursor: e-resize&quot;&gt;e-resize&lt;/span&gt;')">Copy</span>
+    </div>
+  </div>
+
+  <div class="cursor-example">
+    <div class="cursor-type" style="cursor: help">help</div>
+    <div class="cursor-code">
+      &lt;span style="cursor: help"&gt;help&lt;/span&gt;
+      <span class="copy-button" onclick="copyCodeToClipboard('&lt;span style=&quot;cursor: help&quot;&gt;help&lt;/span&gt;')">Copy</span>
+    </div>
+  </div>
+
+  <div class="cursor-example">
+    <div class="cursor-type" style="cursor: move">move</div>
+    <div class="cursor-code">
+      &lt;span style="cursor: move"&gt;move&lt;/span&gt;
+      <span class="copy-button" onclick="copyCodeToClipboard('&lt;span style=&quot;cursor: move&quot;&gt;move&lt;/span&gt;')">Copy</span>
+    </div>
+  </div>
+
+  <div class="cursor-example">
+    <div class="cursor-type" style="cursor: n-resize">n-resize</div>
+    <div class="cursor-code">
+      &lt;span style="cursor: n-resize"&gt;n-resize&lt;/span&gt;
+      <span class="copy-button" onclick="copyCodeToClipboard('&lt;span style=&quot;cursor: n-resize&quot;&gt;n-resize&lt;/span&gt;')">Copy</span>
+    </div>
+  </div>
+
+  <div class="cursor-example">
+    <div class="cursor-type" style="cursor: ne-resize">ne-resize</div>
+    <div class="cursor-code">
+      &lt;span style="cursor: ne-resize"&gt;ne-resize&lt;/span&gt;
+      <span class="copy-button" onclick="copyCodeToClipboard('&lt;span style=&quot;cursor: ne-resize&quot;&gt;ne-resize&lt;/span&gt;')">Copy</span>
+    </div>
+  </div>
+
+  <div class="cursor-example">
+    <div class="cursor-type" style="cursor: nw-resize">nw-resize</div>
+    <div class="cursor-code">
+      &lt;span style="cursor: nw-resize"&gt;nw-resize&lt;/span&gt;
+      <span class="copy-button" onclick="copyCodeToClipboard('&lt;span style=&quot;cursor: nw-resize&quot;&gt;nw-resize&lt;/span&gt;')">Copy</span>
+    </div>
+  </div>
+
+  <div class="cursor-example">
+    <div class="cursor-type" style="cursor: pointer">pointer</div>
+    <div class="cursor-code">
+      &lt;span style="cursor: pointer"&gt;pointer&lt;/span&gt;
+      <span class="copy-button" onclick="copyCodeToClipboard('&lt;span style=&quot;cursor: pointer&quot;&gt;pointer&lt;/span&gt;')">Copy</span>
+    </div>
+  </div>
+
+  <div class="cursor-example">
+    <div class="cursor-type" style="cursor: progress">progress</div>
+    <div class="cursor-code">
+      &lt;span style="cursor: progress"&gt;progress&lt;/span&gt;
+      <span class="copy-button" onclick="copyCodeToClipboard('&lt;span style=&quot;cursor: progress&quot;&gt;progress&lt;/span&gt;')">Copy</span>
+    </div>
+  </div>
+
+  <div class="cursor-example">
+    <div class="cursor-type" style="cursor: s-resize">s-resize</div>
+    <div class="cursor-code">
+      &lt;span style="cursor: s-resize"&gt;s-resize&lt;/span&gt;
+      <span class="copy-button" onclick="copyCodeToClipboard('&lt;span style=&quot;cursor: s-resize&quot;&gt;s-resize&lt;/span&gt;')">Copy</span>
+    </div>
+  </div>
+
+  <div class="cursor-example">
+    <div class="cursor-type" style="cursor: se-resize">se-resize</div>
+    <div class="cursor-code">
+      &lt;span style="cursor: se-resize"&gt;se-resize&lt;/span&gt;
+      <span class="copy-button" onclick="copyCodeToClipboard('&lt;span style=&quot;cursor: se-resize&quot;&gt;se-resize&lt;/span&gt;')">Copy</span>
+    </div>
+  </div>
+
+  <div class="cursor-example">
+    <div class="cursor-type" style="cursor: sw-resize">sw-resize</div>
+    <div class="cursor-code">
+      &lt;span style="cursor: sw-resize"&gt;sw-resize&lt;/span&gt;
+      <span class="copy-button" onclick="copyCodeToClipboard('&lt;span style=&quot;cursor: sw-resize&quot;&gt;sw-resize&lt;/span&gt;')">Copy</span>
+    </div>
+  </div>
+
+  <div class="cursor-example">
+    <div class="cursor-type" style="cursor: text">text</div>
+    <div class="cursor-code">
+      &lt;span style="cursor: text"&gt;text&lt;/span&gt;
+      <span class="copy-button" onclick="copyCodeToClipboard('&lt;span style=&quot;cursor: text&quot;&gt;text&lt;/span&gt;')">Copy</span>
+    </div>
+  </div>
+
+  <div class="cursor-example">
+    <div class="cursor-type" style="cursor: w-resize">w-resize</div>
+    <div class="cursor-code">
+      &lt;span style="cursor: w-resize"&gt;w-resize&lt;/span&gt;
+      <span class="copy-button" onclick="copyCodeToClipboard('&lt;span style=&quot;cursor: w-resize&quot;&gt;w-resize&lt;/span&gt;')">Copy</span>
+    </div>
+  </div>
+
+  <div class="cursor-example">
+    <div class="cursor-type" style="cursor: wait">wait</div>
+    <div class="cursor-code">
+      &lt;span style="cursor: wait"&gt;wait&lt;/span&gt;
+      <span class="copy-button" onclick="copyCodeToClipboard('&lt;span style=&quot;cursor: wait&quot;&gt;wait&lt;/span&gt;')">Copy</span>
+    </div>
+  </div>
+  <!-- Back to Portfolio link -->
+  <div class="back-to-portfolio">
+    <a href="../index.html">Back to Portfolio</a>
+  </div>
+
+  <!-- Copyright section -->
+  <div class="copyright">
+    &copy; 2023 AIGsniper
+  </div>
+</div>
+</body>
+</html>
+

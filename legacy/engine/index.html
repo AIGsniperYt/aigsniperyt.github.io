@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="file-explorer" id="fileExplorer">
+            <h2>Explorer</h2>
+            <ul id="fileList"></ul>
+        </div>
+        <div class="editor">
+            <div id="tabs" class="tabs"></div>
+            <textarea id="editor" placeholder="Type your code or text here..."></textarea>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

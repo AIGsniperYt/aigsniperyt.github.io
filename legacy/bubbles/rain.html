@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bubble Rain</title>
+    <style>
+        /* Add CSS styles for the bubbles here */
+        body {
+            background-color: black;
+            overflow: hidden; /* Prevent scrollbars */
+            margin: 0;
+            padding: 0;
+        }
+
+        .bubble-container {
+            position: absolute;
+        }
+
+        .bubble {
+            width: 5px;
+            height: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out; /* Add a scale effect */
+            position: relative;
+        }
+
+        .hitbox {
+            width: 1000px;
+            height: 1000px;
+            position: absolute;
+            background-color: transparent; /* Transparent hitbox */
+            top: 50%; /* Center hitbox vertically */
+            left: 50%; /* Center hitbox horizontally */
+            transform: translate(-50%, -50%); /* Center the hitbox over the bubble */
+        }
+    </style>
+</head>
+<body>
+    <script>
+        let RandomColor = false; // Set to true for random colors, false for default color
+        let DefaultColor = 'rgba(0, 0, 255, 0.7)'; // Set your default color with 0.7 alpha (e.g., red with transparency)
+        let autopilot = true; // Set to true to enable autopilot, false to disable
+
+        const bubbleColors = [
+            'rgba(255, 0, 0, 0.7)',   // Red with transparency
+            'rgba(0, 255, 0, 0.7)',   // Green with transparency
+            'rgba(0, 0, 255, 0.7)',   // Blue with transparency
+            'rgba(255, 255, 0, 0.7)', // Yellow with transparency
+            'rgba(255, 0, 255, 0.7)'  // Magenta with transparency
+            // Add or remove colors as needed with the desired transparency
+        ];
+
+        // Function to create a bubble and its hitbox and add them to the page
+        function createBubble(x) {
+            const bubbleContainer = document.createElement('div');
+            bubbleContainer.className = 'bubble-container';
+            bubbleContainer.style.left = x + 'px';
+            bubbleContainer.style.top = '-600px'; // Start the bubbles above the screen
+
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+
+            let bubbleColor; // Declare a variable to store the bubble color
+
+            if (RandomColor) {
+                // If RandomColor is true, select a random color
+                bubbleColor = bubbleColors[Math.floor(Math.random() * bubbleColors.length)];
+            } else {
+                // If RandomColor is false, use the DefaultColor
+                bubbleColor = DefaultColor;
+            }
+
+            bubble.style.backgroundColor = bubbleColor;
+
+            const hitbox = document.createElement('div');
+            hitbox.className = 'hitbox';
+
+            bubbleContainer.appendChild(bubble);
+            bubbleContainer.appendChild(hitbox);
+
+            document.body.appendChild(bubbleContainer);
+
+            // Animate the bubble falling down
+            let distance = 0;
+            const animationInterval = setInterval(() => {
+                distance += 10; // Adjust the speed
+                bubbleContainer.style.top = distance + 'px';
+                if (distance >= window.innerHeight) {
+                    clearInterval(animationInterval);
+                    bubbleContainer.remove();
+                }
+            }, 10);
+        }
+
+        // Function to spawn 100 raindrops with random X positions
+        function spawnRain() {
+            for (let i = 0; i < 10; i++) {
+                const screenWidth = window.innerWidth;
+                const randomX = Math.random() * (screenWidth - 10); // Adjust for bubble size
+                createBubble(randomX);
+            }
+        }
+
+        // Continue spawning raindrops every millisecond
+        setInterval(spawnRain, 1);
+    </script>
+</body>
+</html>

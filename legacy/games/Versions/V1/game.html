@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving a Character</title>
+    <style>
+        body {
+            background-color: #333;
+        }
+
+        #player {
+            width: 50px;
+            height: 50px;
+            background-color: #98FF98;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .backlinks {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .backlinks a {
+            text-decoration: none;
+            color: #98FF98;
+            margin: 5px;
+            transition: color 0.3s;
+        }
+
+        .backlinks a:hover {
+            color: #77CC77;
+        }
+    </style>
+</head>
+<body>
+    <div id="player"></div>
+    <script>
+        const player = document.getElementById("player");
+
+        let x = 0;
+        let y = 0;
+
+        function updatePosition() {
+            player.style.left = x + "px";
+            player.style.top = y + "px";
+        }
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowUp") {
+                y -= 10;
+            } else if (event.key === "ArrowDown") {
+                y += 10;
+            } else if (event.key === "ArrowLeft") {
+                x -= 10;
+            } else if (event.key === "ArrowRight") {
+                x += 10;
+            }
+
+            updatePosition();
+        });
+    </script>
+    <div class="backlinks">
+        <a href="../../index.html">Back to Landing Page</a>
+        <a href="../../../index.html">Back to Portfolio</a>
+    </div>
+</body>
+</html>

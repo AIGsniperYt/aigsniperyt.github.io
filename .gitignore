@@ -1,0 +1,25 @@
+# ── Flagship / major repos: own their remotes, never tracked here ──
+# (each has its own .git AND is ignore-listed, so it can never leak upstream)
+/equilibrium/
+/flight-sim/
+/webgl/
+/chat/
+/neuronet/
+/lab/C/rust_engine/
+
+# ── Generated / sensitive ──
+**/node_modules/
+**/dist/
+**/builds/
+**/keys/
+**/.env
+**/.env.*
+*.log
+neuronet-export-*.json
+*.sorted.json
+
+# ── OS / editor noise ──
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

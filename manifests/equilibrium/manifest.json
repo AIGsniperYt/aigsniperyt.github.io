@@ -1,0 +1,28 @@
+{
+  "$schema": 1,
+  "project": {
+    "name": "Equilibrium",
+    "description": "Browser-based isometric souls-like survival RPG — chunked open world, melee/ranged combat, soul meter, crafting, and lore-driven progression, built on PixiJS.",
+    "url": "https://aigsniperyt.github.io/equilibrium/",
+    "repo": "https://github.com/aigsniperyt/equilibrium-dev",
+    "category": "Games",
+    "tags": ["pixijs", "isometric", "souls-like", "javascript", "browser-game"]
+  },
+  "release": {
+    "version": "V6",
+    "date": "2026-08-07",
+    "changelog": [
+      "added: the soul system — soul is a resource earned from kills and spent on repair; bleed and leak drain you below an equilibrium point, and the game's title is now a literal mechanic",
+      "changed: enemies see and hear the world now — a 150° FOV cone, footstep and attack noise, arrows spotted at full range, and slimes that freeze then panic when they see a death",
+      "added: full day/night cycle — the world runs a 10-minute cycle of deep blue nights, warm golden dawn and dusk, and neutral days",
+      "changed: soul meter redesigned as crystallised light — a pointy-top hexagon rimmed by 12 glowing warm-white hexagons, a crown at full soul, and shattering shards when tiers are lost",
+      "added: focus healing — stand still while holding R to double your heal rate to 16 HP/s; the leak slows and you can finally climb past 91% health",
+      "changed: hotbar rebuilt from the ground up — four animated corner brackets on each slot that extend on hover and glow gold when equipped, over a soft pearl background",
+      "added: dash and time-freeze — Shift dashes you at 5× speed while invincible; Space freezes the world while you keep moving and attacking",
+      "added: changelog readable in-game — press C to open this very log in a soul-meter-styled panel, so every update shows up right in the game"
+    ]
+  },
+  "media": {
+    "image": ""
+  }
+}

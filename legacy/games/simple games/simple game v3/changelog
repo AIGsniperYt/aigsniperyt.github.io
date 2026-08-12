@@ -1,0 +1,29 @@
+
+12/01/2025
+Updates:
+- changed the color of the asteroids to be more deep dark blue comsic themed
+- made asteroids go spinny spinny 
+- made asteroids have size and speed inversely proportional
+- player can fly around (tested using dots)
+- made the dots into a smoke trail
+
+Fixes required:
+- background looking plain and bland, should add one
+- give player a scrap counter
+- let player shoot
+- + more advanced fixes later (shown with brackets)
+--------------------------------------------------------------------------------------------------------------
+Prechangelog
+Features:
+- spawned pentagon asteroids that I really liked. They fly around but don't collide, I think I'll keep that.
+- added the player triangle in the middle of the screen
+
+Fixes required:
+- allow player to fly around the world with camera follow
+- give player a scrap counter
+- change color of asteroids, too purple, I want it more dark blue cosmic themed
+- let player shoot bullets
+- (make asteroids get destroyed by bullets)
+- (make asteroids drop scrap that float around, maybe they get blown away from each other with a camera shake ooh great idea)
+- more fixes needed, but they are later on and the previous ones mentioned should be dealt with first
+

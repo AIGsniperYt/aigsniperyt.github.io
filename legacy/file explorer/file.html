@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Explorer</title>
+  <link rel="stylesheet" type="text/css" href="file.css">
+</head>
+<body>
+  <div id="explorer">
+    <header>
+      <h1>File Explorer</h1>
+      <div id="current-directory">Current Directory: /</div>
+      <input type="text" id="search-bar" placeholder="Enter directory name..." />
+      <button id="search-button">Go</button>
+      <button id="back-button" style="display:none;">Back</button>
+    </header>
+    <div id="file-list">
+      <div class="directory" data-directory="Documents">
+        <img src="folder-icon.png" alt="Folder" class="icon">
+        <span class="name">Documents</span>
+      </div>
+      <div class="directory" data-directory="Downloads">
+        <img src="folder-icon.png" alt="Folder" class="icon">
+        <span class="name">Downloads</span>
+      </div>
+      <div class="directory" data-directory="Pictures">
+        <img src="folder-icon.png" alt="Folder" class="icon">
+        <span class="name">Pictures</span>
+      </div>
+      <div class="directory" data-directory="Music">
+        <img src="folder-icon.png" alt="Folder" class="icon">
+        <span class="name">Music</span>
+      </div>
+      <div class="directory" data-directory="Videos">
+        <img src="folder-icon.png" alt="Folder" class="icon">
+        <span class="name">Videos</span>
+      </div>
+    </div>
+  </div>
+  <script src="file.js"></script>
+</body>
+</html>

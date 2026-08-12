@@ -1,0 +1,1 @@
+if not thing in x,y then place node

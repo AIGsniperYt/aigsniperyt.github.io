@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split-Screen Project</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #2c2c2c; /* Dark gray-black background color */
+            color: #37B8B8; /* White text color */
+        }
+
+        .right-box {
+            flex: 1;
+            padding: 7vh 6vw;
+            margin: 7vh 6vw;
+            overflow: auto;
+            border-radius: 20px;
+            background-color: #333; /* Dark gray right side content background color */
+        }
+
+        .left-box {
+            flex: 1;
+            padding: 7vh 6vw;
+            margin: 7vh 6vw;
+            overflow: auto;
+            border-radius: 20px;
+            background-color: #333; /* Dark gray right side content background color */
+        }
+
+        /* Customize styles for the bars */
+        .bar {
+            cursor: pointer;
+            margin-bottom: 10px;
+            background-color: #2c2c2c; /* Cyan left side bar color */
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+
+
+        }
+
+        .bar:hover {
+            background-color: #00FFFF;
+            color: #006B6B;
+            /* Cyan highlight color on hover */
+        }
+
+        /* Add more custom styles as needed */
+        /* Style the game links */
+        a {
+            font-weight: bold; /* Make the text bold */
+            font-family: Arial, sans-serif; /* Use a sans-serif font like Arial */
+            color: cyan; /* Set the text color to cyan */
+            text-decoration: none; /* Remove underlines from links */
+            transition: color 0.3s; /* Smooth color transition for hover effect */
+            text-shadow: 0 0 10px #00FFFF; /* Neon text shadow */
+        }
+
+        /* Style links on hover */
+        a:hover {
+            text-shadow: 0 0 20px #00FFFF; /* Expand the neon text shadow on hover */
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="left-box">
+        <div class="bar" data-version="Basic Movement System">V1 - Basic Movement System</div>
+        <div class="bar" data-version="Improved Movement System">V2 - Improved Movement System</div>
+        <div class="bar" data-version="WASD and arrow keys">V3 - WASD and arrow keys</div>
+        <div class="bar" data-version="WASD and arrow keys 2">V4 - WASD and arrow keys 2</div>
+
+    </div>
+    <div class="right-box">
+        <!-- Content for the right box will be inserted dynamically with JavaScript -->
+    </div>
+
+    <script>
+        // JavaScript code for handling bar clicks and updating the right box
+        const bars = document.querySelectorAll('.bar');
+        const rightBox = document.querySelector('.right-box');
+
+        const gameVersions = [
+            {
+                version: 'Basic Movement System',
+                description: "In this version I made a really basic movement system. Its just a green circle that you can move around your screen using the arrow keys. It's got a lot of flaws. I've just changed the colours to a darker theme so it doesn't hurt anyones eyes",
+                issues: [
+                    {
+                        type: 'Issue 1 - ',
+                        description: 'The character (Blue Circle) stops moving for a moment if you press any other key',
+                    },
+                     {
+                        type: 'Issue 2 - ',
+                        description: "You can only use arrow keys, and not WASD like all standard games. It's the same vice versa so if I code it to be WASD, then you cant use arrow keys interchangably.",
+                    },
+                    {
+                        type: 'Bug 1- ',
+                        description: "It seems to be able to extend the page if I try moving it right when its as right as it can go. It seems to be the same for extending the page down when its as down as it can go. This annoyingly also creates its own scrollbars.",
+                    },
+                ],
+                gameLink: 'Versions/V1/game.html'
+            },
+            {
+                version: 'Improved Movement System',
+                description: "I fixed a bug in the previous version where it stopped for a moment if you pressed any other key. Now it's smooth and you can move diagonally too! Now to fix the fact that the character can go out of your screen where  you cant see it and extend the page which is not normal game mechanics.",
+                issues: [
+                    {
+                        type: 'Issue 1 - ',
+                        description: "You can only use arrow keys, and not WASD like all standard games. It's the same vice versa so if I code it to be WASD, then you cant use arrow keys interchangably.",
+                    },
+                    {
+                        type: 'Bug 1 - ',
+                        description: "It seems to be able to extend the page if I try moving it right when its as right as it can go. It seems to be the same for extending the page down when its as down as it can go. This annoyingly also creates its own scrollbars.",
+                    },
+                    {
+                        type: 'Issue 2 - ',
+                        description: "It's wayy too fast compared to the previous version, even though I havent changed anything regarding the players's speed. This can be easily fixed by adding a speed variable.",
+                    },
+                ],
+                gameLink: 'Versions/V2/game.html'
+            },
+            {
+                version: "WASD and arrow keys",
+                description: "I fixed a bug in the previous version where it stopped for a moment if you pressed any other key. Now it's smooth and you can move diagonally too! Now I will make you be able to use WASD and arrow keys interchangably. I'll also quickly fix the issue regarding speed.",
+                issues: [
+                    {
+                        type: 'Issue 1 - ',
+                        description: "You can only use arrow keys, and not WASD like all standard games. It's the same vice versa so if I code it to be WASD, then you cant use arrow keys interchangably.",
+                    },
+                    {
+                        type: 'Bug 1 - ',
+                        description: "It seems to be able to extend the page if I try moving it right when its as right as it can go. It seems to be the same for extending the page down when its as down as it can go. This annoyingly also creates its own scrollbars.",
+                    },
+                    {
+                        type: 'Issue 2 - ',
+                        description: "It's wayy too fast compared to the previous version, even though I havent changed anything regarding the players's speed. This can be easily fixed by adding a speed variable.",
+                    },
+                ],
+                gameLink: 'Versions/V3/game.html'
+            },
+            {
+                version: "WASD and arrow keys 2",
+                description: "Small issue, unless you have caps lock on, you cant use WASD keys and i quickly fixed that.",
+                issues: [
+                    {
+                        type: '',
+                        description: "Just a minor bug, doesnt need the full issues and bugs blah blah blah.",
+                    },
+                ],
+                gameLink: 'Versions/V4/game.html'
+            },
+
+        ];
+
+        bars.forEach(bar => {
+            bar.addEventListener('click', () => {
+                const versionName = bar.getAttribute('data-version');
+                const versionData = gameVersions.find(v => v.version === versionName);
+
+                if (versionData) {
+                    // Generate the HTML for the right box with desired formatting
+                    rightBox.innerHTML = `
+                        <h2>${versionData.version}</h2>
+                        <p>Description: ${versionData.description}</p>
+                        <h3>Issues:</h3>
+                        <ul>
+                            ${versionData.issues.map(issue => `
+                                <li>
+                                    <strong>${issue.type}</strong> ${issue.description}
+                                </li>
+                            `).join('')}
+                        </ul>
+                        <a href="${versionData.gameLink}" target="_blank">Play the Game</a> <!-- Add this line -->
+                    `;
+                }
+            });
+        });
+    </script>
+
+
+</body>
+</html>

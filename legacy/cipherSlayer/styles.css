@@ -1,0 +1,109 @@
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: #121212;
+    color: #fff;
+}
+
+/* Container Layout */
+#container {
+    display: flex;
+    height: 100vh; /* Full screen height */
+    width: 100%;
+}
+
+/* Side Menu */
+#sideMenu {
+    width: 20%;
+    background: #1e1e1e;
+    border-right: 2px solid #333;
+    padding: 10px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+}
+
+#sideMenu h2 {
+    text-align: center;
+    color: #00ffc6;
+    margin-bottom: 20px;
+}
+
+.toolButton {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    background: #282828;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.toolButton:hover {
+    background: #00ffc6;
+    color: #000;
+}
+
+/* Main Content */
+#mainContent {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#scrambleText {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+    height: 2rem;
+    transition: all 0.3s ease;
+}
+
+#cipherInput {
+    width: 80%;
+    height: 300px;
+    font-size: 1.2rem;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background: #1e1e1e;
+    color: #fff;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+#cipherInput:focus {
+    border-color: #00ffc6;
+    box-shadow: 0 0 5px #00ffc6;
+}
+
+#decipherButton {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background: #00ffc6;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#decipherButton:hover {
+    background: #fff;
+    color: #000;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #00ffc6;
+    text-align: center;
+}

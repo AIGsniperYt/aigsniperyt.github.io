@@ -1,0 +1,17 @@
+fix poison effects bug,
+introduce new zombies,
+introduce zombie bosses
+introduce a shop to buy scorestreaks
+introduce a minigun
+make powerups
+make a rpg
+make a god ray weapon
+fix dashing bug
+when player shoots, make gun recoil player,
+and maybe add knockback for zombies too
+
+URGENT:
+Make at the bottom whcih powerups are active
+
+
+Make a interface to write text, then save it to a databsese

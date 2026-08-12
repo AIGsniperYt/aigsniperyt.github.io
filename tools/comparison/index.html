@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code/Text Difference Checker</title>
+    <style>
+        :root {
+            --bg-primary: #1e1e2e;
+            --bg-secondary: #2a2a3a;
+            --bg-tertiary: #383848;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --accent-primary: #7aa2f7;
+            --accent-secondary: #bb9af7;
+            --added-bg: #2a4a2a;
+            --added-text: #9ece6a;
+            --removed-bg: #4a2a2a;
+            --removed-text: #f7768e;
+            --border-color: #3b3b4d;
+            --highlight: #414868;
+        }
+
+        body {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .app-container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--accent-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h1::before {
+            content: "≫";
+            color: var(--accent-secondary);
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        button:hover {
+            background-color: var(--highlight);
+        }
+
+        #compareBtn {
+            background-color: var(--accent-primary);
+            color: #1a1a2e;
+        }
+
+        #compareBtn:hover {
+            background-color: #8ab4ff;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .text-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .label {
+            padding: 12px 16px;
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--text-secondary);
+            background-color: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .label::before {
+            content: "◈";
+            color: var(--accent-secondary);
+            font-size: 12px;
+        }
+
+        textarea {
+            flex: 1;
+            padding: 16px;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            border: none;
+            resize: none;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            tab-size: 4;
+            white-space: pre;
+            overflow-wrap: normal;
+            overflow-x: auto;
+        }
+
+        textarea:focus {
+            outline: none;
+            background-color: var(--bg-tertiary);
+        }
+
+        .diff-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .diff-output {
+            flex: 1;
+            padding: 0;
+            overflow-y: auto;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            background-color: var(--bg-tertiary);
+            white-space: pre;
+        }
+
+        .diff-line {
+            display: flex;
+            min-height: 20px;
+            padding: 2px 16px;
+            font-family: inherit;
+            font-size: inherit;
+            white-space: pre;
+        }
+
+        .added {
+            background-color: var(--added-bg);
+            color: var(--added-text);
+        }
+
+        .removed {
+            background-color: var(--removed-bg);
+            color: var(--removed-text);
+            text-decoration: line-through;
+        }
+
+        .line-number {
+            color: var(--text-secondary);
+            width: 40px;
+            min-width: 40px;
+            text-align: right;
+            margin-right: 10px;
+            user-select: none;
+        }
+
+        .empty-line-number {
+            width: 40px;
+            min-width: 40px;
+            margin-right: 10px;
+        }
+
+        .line-content {
+            flex: 1;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .text-container, .diff-container {
+                min-height: 300px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Code Difference Analyzer</h1>
+        </header>
+
+        <div class="controls">
+            <button id="compareBtn">Compare</button>
+            <button id="clearBtn">Clear All</button>
+        </div>
+
+        <div class="container">
+            <div class="text-container">
+                <div class="label">Original Text</div>
+                <textarea id="originalText" spellcheck="false" placeholder="Paste original content here..."></textarea>
+            </div>
+
+            <div class="text-container">
+                <div class="label">Modified Text</div>
+                <textarea id="modifiedText" spellcheck="false" placeholder="Paste modified content here..."></textarea>
+            </div>
+
+            <div class="diff-container">
+                <div class="label">Differences</div>
+                <div id="diffOutput" class="diff-output"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const originalText = document.getElementById('originalText');
+            const modifiedText = document.getElementById('modifiedText');
+            const diffOutput = document.getElementById('diffOutput');
+            const compareBtn = document.getElementById('compareBtn');
+            const clearBtn = document.getElementById('clearBtn');
+
+            // Compare on button click
+            compareBtn.addEventListener('click', compareTexts);
+
+            // Compare on any text change with debounce
+            let debounceTimer;
+            [originalText, modifiedText].forEach(textarea => {
+                textarea.addEventListener('input', () => {
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(compareTexts, 300);
+                });
+            });
+
+            // Clear both textareas
+            clearBtn.addEventListener('click', () => {
+                originalText.value = '';
+                modifiedText.value = '';
+                diffOutput.innerHTML = '';
+            });
+
+            function compareTexts() {
+                const text1 = originalText.value;
+                const text2 = modifiedText.value;
+
+                if (!text1 && !text2) {
+                    diffOutput.innerHTML = '';
+                    return;
+                }
+
+                const diff = findDifferences(text1, text2);
+                renderDifferences(diff);
+            }
+
+            function findDifferences(text1, text2) {
+                const lines1 = text1.split('\n');
+                const lines2 = text2.split('\n');
+                const lcsMatrix = buildLCSMatrix(lines1, lines2);
+                return extractDifferences(lcsMatrix, lines1, lines2, lines1.length, lines2.length);
+            }
+
+            function buildLCSMatrix(lines1, lines2) {
+                const m = lines1.length;
+                const n = lines2.length;
+                const lcsMatrix = Array(m + 1).fill().map(() => Array(n + 1).fill(0));
+
+                for (let i = 0; i <= m; i++) {
+                    for (let j = 0; j <= n; j++) {
+                        if (i === 0 || j === 0) {
+                            lcsMatrix[i][j] = 0;
+                        } else if (lines1[i - 1] === lines2[j - 1]) {
+                            lcsMatrix[i][j] = lcsMatrix[i - 1][j - 1] + 1;
+                        } else {
+                            lcsMatrix[i][j] = Math.max(lcsMatrix[i - 1][j], lcsMatrix[i][j - 1]);
+                        }
+                    }
+                }
+
+                return lcsMatrix;
+            }
+
+            function extractDifferences(lcsMatrix, lines1, lines2, i, j) {
+                const diff = [];
+
+                while (i > 0 || j > 0) {
+                    if (i > 0 && j > 0 && lines1[i - 1] === lines2[j - 1]) {
+                        diff.unshift({
+                            type: 'equal',
+                            value: lines1[i - 1],
+                            line1: i,
+                            line2: j
+                        });
+                        i--;
+                        j--;
+                    } else if (j > 0 && (i === 0 || lcsMatrix[i][j - 1] >= lcsMatrix[i - 1][j])) {
+                        diff.unshift({
+                            type: 'added',
+                            value: lines2[j - 1],
+                            line2: j
+                        });
+                        j--;
+                    } else if (i > 0 && (j === 0 || lcsMatrix[i][j - 1] < lcsMatrix[i - 1][j])) {
+                        diff.unshift({
+                            type: 'removed',
+                            value: lines1[i - 1],
+                            line1: i
+                        });
+                        i--;
+                    }
+                }
+
+                return diff;
+            }
+
+            function renderDifferences(diff) {
+                diffOutput.innerHTML = '';
+
+                diff.forEach(part => {
+                    const lineEl = document.createElement('div');
+                    lineEl.className = 'diff-line';
+
+                    if (part.type === 'equal') {
+                        lineEl.innerHTML = `
+                            <span class="line-number">${part.line1}</span>
+                            <span class="line-number">${part.line2}</span>
+                            <span class="line-content">${escapeHtml(part.value)}</span>
+                        `;
+                    } else if (part.type === 'added') {
+                        lineEl.classList.add('added');
+                        lineEl.innerHTML = `
+                            <span class="empty-line-number"></span>
+                            <span class="line-number">${part.line2}</span>
+                            <span class="line-content">${escapeHtml(part.value)}</span>
+                        `;
+                    } else if (part.type === 'removed') {
+                        lineEl.classList.add('removed');
+                        lineEl.innerHTML = `
+                            <span class="line-number">${part.line1}</span>
+                            <span class="empty-line-number"></span>
+                            <span class="line-content">${escapeHtml(part.value)}</span>
+                        `;
+                    }
+
+                    diffOutput.appendChild(lineEl);
+                });
+            }
+
+            function escapeHtml(unsafe) {
+                return unsafe
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
+        });
+    </script>
+</body>
+</html>
