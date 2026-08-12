@@ -12,13 +12,11 @@ experiments — living in one folder and wired into the live catalogue.
   interactive parallax starfield, a featured-projects grid, a filterable project
   browser (category and status filters: **MAJOR / Legacy / Deprecated / Reviving**), a
   latest-update feed, and a theme switcher (Forest / Alpine / Purple).
-- `redirect.html` — legacy "site migration" stub; candidate for removal.
 
 ## Repo layout at a glance
 
 ```
 index.html          The portfolio — every project is wired into its catalogue/featured data
-redirect.html       Domain redirect helper
 README.md           This file
 
 legacy/             Older / migrated projects (all linked from the portfolio)
