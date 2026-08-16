@@ -2847,8 +2847,33 @@ function renderLatestUpdate(u) {
    Each project repo serves a manifest.json at its root. Add a new
    entry below when you ship a new project with a manifest.
    ============================================================ */
+
+/* Equilibrium — the redirect page is the smart proxy. It resolves the actual
+   build URL (equilibrium-vN/), so we ask it where the newest build lives and
+   fetch THAT build's own manifest.json from its root — no manifest needs to be
+   maintained at the redirect root anymore. Legacy fallback: if the newest build
+   doesn't carry a manifest yet, reuse the redirect-root manifest if present. */
+async function resolveEquilibriumManifest() {
+    const REDIRECT = "https://aigsniperyt.github.io/equilibrium/";
+
+    const redirect = await fetch(REDIRECT, { cache: 'no-cache' });
+    if (!redirect.ok) throw new Error('redirect ' + redirect.status);
+    const html = await redirect.text();
+    const urlMatch = html.match(/content="[^"]*url=([^"]+)"/i) || html.match(/id="go"\s+href="([^"]+)"/i);
+    if (!urlMatch) throw new Error('no build url in redirect page');
+    const base = urlMatch[1].replace(/\/?$/, '/');
+
+    const buildRes = await fetch(base + 'manifest.json', { cache: 'no-cache' });
+    if (buildRes.ok) return { m: await buildRes.json(), base };
+
+    const legacyRes = await fetch(REDIRECT + 'manifest.json', { cache: 'no-cache' });
+    if (legacyRes.ok) return { m: await legacyRes.json(), base: REDIRECT };
+
+    throw new Error('no manifest in build ' + base);
+}
+
 const MANIFEST_SOURCES = [
-    { name: "Equilibrium",       url: "https://aigsniperyt.github.io/equilibrium/manifest.json" },
+    { name: "Equilibrium",       resolve: resolveEquilibriumManifest },
     { name: "Chess AI (Kaiser)", url: "https://aigsniperyt.github.io/kaiser/manifest.json" },
     { name: "Flight Simulator",  url: "https://aigsniperyt.github.io/flight-sim/manifest.json" }
 ];
@@ -2897,7 +2922,11 @@ async function loadLatestUpdate() {
     showUpdateLoading();
     try {
         const results = await Promise.allSettled(
-            MANIFEST_SOURCES.map(src => fetchManifest(src.url).then(m => ({ m, base: src.url })))
+            MANIFEST_SOURCES.map(src =>
+                src.resolve
+                    ? src.resolve()
+                    : fetchManifest(src.url).then(m => ({ m, base: src.url }))
+            )
         );
         const newest = results
             .filter(r => r.status === 'fulfilled' && r.value)
