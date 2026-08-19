@@ -112,6 +112,12 @@ means an older project slated to come back.
 | [AI Chatbot](PoC/chatbot/gemini-wrapper/index.html) | Gemini-powered chatbot web wrapper | |
 | [Gunr](legacy/games/gunr/index.html) | Proof-of-concept multiplayer attempt — seed of the full multiplayer system | legacy, revival |
 
+### IoT & Hardware
+
+| Project | Overview | Status |
+| --- | --- | --- |
+| [SIM800 GSM Console](gateway/frontend/index.html) | Browser console for an ESP8266 + SIM800 GSM module — WebSocket/HTTP bridge for AT commands: terminal, live dashboard, SMS, calls ([repo](https://github.com/AIGsniperYt/gateway)) | |
+
 ### Other
 
 | Project | Overview | Status |
@@ -186,7 +192,9 @@ The following folders are their own git repositories and are ignored by this
 monolith's `.gitignore`. They keep their own history, remotes, and ignore rules:
 
 `chat/`, `equilibrium/`, `flight-sim/`, `webgl/`, `neuronet/` (and `chess/`,
-`lab/C/rust_engine/`).
+`lab/C/rust_engine/`, `yorg/`). `gateway/` was folded into this monolith (its
+public repo at `AIGsniperYt/gateway` remains the source of truth for the
+backend + README).
 
 They have both local entry points (e.g. `chat/index.html`, `chess/v2/ai.html`,
 `neuronet/frontend/index.html`) and live GitHub Pages deployments, which the

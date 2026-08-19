@@ -542,6 +542,17 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--emerald) !important;
 }
 
+.browser-card-repo {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    transition: color 0.3s;
+    flex-shrink: 0;
+}
+
+.browser-card-repo:hover {
+    color: var(--emerald) !important;
+}
+
 .browser-card-arrow {
     color: var(--text-muted);
     font-size: 0.75rem;
@@ -782,6 +793,28 @@ header .container {
     border-color: var(--emerald);
     box-shadow: 0 0 14px var(--emerald-glow);
     color: var(--emerald);
+}
+
+/* Smooth full-page colour crossfade on theme switch */
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+    transition:
+        background-color 0.5s ease,
+        color 0.5s ease,
+        border-color 0.5s ease,
+        fill 0.5s ease,
+        stroke 0.5s ease !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html.theme-switching,
+    html.theme-switching *,
+    html.theme-switching *::before,
+    html.theme-switching *::after {
+        transition: none !important;
+    }
 }
 
 /* ── Hero ── */
@@ -1325,10 +1358,11 @@ header .container {
 }
 
 .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
+    display: block;
+}
+
+.about .skills-cloud {
+    margin-top: 44px;
 }
 
 .about-text h2 {
@@ -1644,26 +1678,26 @@ footer {
                 <p>Computers changed that. In a sandbox game, I could build a castle as big as I wanted — bigger than me — and actually walk inside it. The computer doesn't run out of bricks. What really clicked was that it's deterministic: it does exactly what I tell it to. When something breaks, it's not an unreliable machine being unfair to me — it's a bug I wrote, and fixing it is on me. Physical and financial limits you can't reason with. A bug, you can.</p>
                 <p>But then, being a player stopped being enough, so I taught myself to build the things I wished existed — and I've been building ever since. It's not a career path so much as a habit of chasing whatever catches my interest: flight sims, a chess AI that evolves its own strategy, and tools I actually use — Neuronet, a personal knowledge system, and a past-paper tracker built to log my GCSE scores and how many papers I had left. Equilibrium is the largest of them, a world I keep expanding — but honestly, every project is just a castle I once couldn't afford to build :D</p>
             </div>
-            <div class="skills-cloud reveal-right">
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">Unity</span>
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">Web Design</span>
-                <span class="skill-tag">ES6 Modules</span>
-                <span class="skill-tag">Genetic Algorithms</span>
-                <span class="skill-tag">WebGL</span>
-                <span class="skill-tag">C</span>
-                <span class="skill-tag">Rust</span>
-                <span class="skill-tag">Optimisation Lover :D</span>
-                <span class="skill-tag">Linux Admin</span>
-                <span class="skill-tag">Embedded Systems</span>
-                <span class="skill-tag">GSM / Cellular Communications</span>
-                <span class="skill-tag">Arduino</span>
-                <span class="skill-tag">Raspberry Pi 3B, 5</span>
-                <span class="skill-tag">Asterisk/FreePBX</span>
-                <span class="skill-tag">Networking</span>
-                <span class="skill-tag">Hardware-Software Integration</span>
-            </div>
+        </div>
+        <div class="skills-cloud reveal">
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Unity</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Web Design</span>
+            <span class="skill-tag">ES6 Modules</span>
+            <span class="skill-tag">Genetic Algorithms</span>
+            <span class="skill-tag">WebGL</span>
+            <span class="skill-tag">C</span>
+            <span class="skill-tag">Rust</span>
+            <span class="skill-tag">Optimisation Lover :D</span>
+            <span class="skill-tag">Linux Admin</span>
+            <span class="skill-tag">Embedded Systems</span>
+            <span class="skill-tag">GSM / Cellular Communications</span>
+            <span class="skill-tag">Arduino</span>
+            <span class="skill-tag">Raspberry Pi 3B, 5</span>
+            <span class="skill-tag">Asterisk/FreePBX</span>
+            <span class="skill-tag">Networking</span>
+            <span class="skill-tag">Hardware-Software Integration</span>
         </div>
     </div>
 </section>
@@ -1942,7 +1976,6 @@ const portfolioData = {
             tags: ["Three.js", "WebGL", "3D", "Archive"],
             url: ROOT_PATH + "webgl/index.html",
             icon: "globe",
-            flagship: true,
             category: "3D"
         },
         {
@@ -2212,6 +2245,18 @@ const portfolioData = {
             revival: "planned",
             icon: "comments",
             category: "Communication"
+        },
+
+        // ── IoT & Hardware ──
+        {
+            name: "SIM800 GSM Console",
+            description: "Browser console for an ESP8266 + SIM800 GSM module — a WebSocket/HTTP bridge drives the module's AT commands from a terminal, live dashboard, SMS inbox, and call dialpad.",
+            tags: ["ESP8266", "SIM800", "C++", "Arduino", "WebSocket", "IoT"],
+            url: ROOT_PATH + "gateway/frontend/index.html",
+            repoUrl: "https://github.com/AIGsniperYt/gateway",
+            icon: "signal",
+            flagship: true,
+            category: "IoT"
         },
 
         // ── Other ──
@@ -2772,12 +2817,14 @@ const root = document.documentElement;
 const toggle = document.getElementById('themeToggle');
 const THEMES = ['', 'alpine', 'purple'];
 toggle.addEventListener('click', () => {
+    root.classList.add('theme-switching');
     const current = root.getAttribute('data-theme') || '';
     const idx = THEMES.indexOf(current);
     const next = THEMES[(idx + 1) % THEMES.length];
     if (next) root.setAttribute('data-theme', next);
     else root.removeAttribute('data-theme');
     refreshThemeRgb();
+    setTimeout(() => root.classList.remove('theme-switching'), 500);
 });
 
 /* ============================================================
@@ -2992,6 +3039,10 @@ function renderFeatured() {
                         <i class="fa-solid fa-code" style="font-size:0.7rem"></i>
                         Source
                     </a>` : ''}
+                    ${p.repoUrl ? `<a href="${p.repoUrl}" target="_blank" class="btn-ghost" style="font-size:0.8rem;padding:6px 14px">
+                        <i class="fa-brands fa-github" style="font-size:0.8rem"></i>
+                        GitHub
+                    </a>` : ''}
                 </div>
             </div>
         </div>
@@ -3059,6 +3110,9 @@ function renderBrowser() {
                 </a>` : ''}
                 ${p.codeViewer ? `<a href="${p.codeViewer}" target="_blank" class="browser-card-code" title="View source code" aria-label="View source code">
                     <i class="fa-solid fa-code"></i>
+                </a>` : ''}
+                ${p.repoUrl ? `<a href="${p.repoUrl}" target="_blank" class="browser-card-repo" title="GitHub repository" aria-label="GitHub repository">
+                    <i class="fa-brands fa-github"></i>
                 </a>` : ''}
                 ${p.versions ? `
                 <button class="browser-card-versions-btn" aria-expanded="false" aria-label="Show archived versions" title="Archived versions">
