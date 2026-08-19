@@ -3127,9 +3127,17 @@ function renderBrowser() {
         countEl.textContent = `Showing ${filtered.length} of ${portfolioData.catalogue.length} projects`;
 
         requestAnimationFrame(() => {
-            gridEl.querySelectorAll('.browser-card').forEach((card, i) => {
-                setTimeout(() => card.classList.add('visible'), i * 30);
-            });
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            gridEl.querySelectorAll('.browser-card').forEach(card => observer.observe(card));
+
             gridEl.querySelectorAll('.browser-card-versions-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const card = btn.closest('.browser-card');
