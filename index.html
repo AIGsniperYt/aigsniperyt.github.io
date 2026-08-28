@@ -1353,6 +1353,162 @@ html.theme-switching *::after {
     padding-top: 20px;
 }
 
+/* ── Revival (half built ruins yet to be restored) ── */
+.revival {
+    padding: 20px 0 40px;
+}
+
+.revival-sub {
+    text-align: center;
+    color: var(--text-soft);
+    margin: -32px 0 40px;
+    font-size: 0.95rem;
+}
+
+.revival-spotlight {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+.revival-btn {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-soft);
+    cursor: pointer;
+    z-index: 5;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    transition: color 0.3s, border-color 0.3s, background 0.3s, opacity 0.3s;
+}
+
+.revival-btn:hover {
+    background: var(--glass-bg);
+    border-color: var(--emerald);
+    color: var(--emerald);
+    opacity: 1;
+}
+
+.revival-stage {
+    flex: 1;
+    display: grid;
+    overflow: hidden;
+}
+
+.revival-slide {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 30px 32px;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    opacity: 0;
+    transform: translateY(18px);
+    pointer-events: none;
+    transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.revival-slide.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.revival-slide-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.revival-slide-icon {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--emerald);
+    background: linear-gradient(135deg, var(--forest-canopy), var(--forest-understory));
+}
+
+.revival-slide-title {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.revival-slide-desc {
+    color: var(--text-soft);
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+.revival-slide-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.revival-slide-tags span {
+    padding: 4px 12px;
+    background: rgba(var(--emerald-rgb), 0.08);
+    border: 1px solid rgba(var(--emerald-rgb), 0.12);
+    color: var(--emerald);
+    border-radius: 100px;
+    font-size: 0.75rem;
+}
+
+.revival-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.revival-count {
+    font-size: 0.8rem;
+    color: var(--text-soft);
+    margin-right: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+.revival-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    background: var(--glass-border);
+    cursor: pointer;
+    transition: background 0.3s, width 0.3s, box-shadow 0.3s;
+}
+
+.revival-dot:hover {
+    background: var(--emerald);
+}
+
+.revival-dot.active {
+    background: var(--emerald);
+    width: 24px;
+    border-radius: 100px;
+    box-shadow: 0 0 10px var(--emerald-glow);
+}
+
 /* ── About ── */
 .about {
     padding: 100px 0;
@@ -1485,6 +1641,15 @@ footer {
         grid-template-columns: 1fr;
     }
 
+    .revival-slide {
+        padding: 24px 22px;
+    }
+
+    .revival-btn {
+        width: 38px;
+        height: 38px;
+    }
+
     .browser-grid {
         grid-template-columns: 1fr;
     }
@@ -1516,6 +1681,16 @@ footer {
     .floating-shapes .shape-2 {
         width: 120px;
         height: 120px;
+    }
+
+    .revival-spotlight {
+        gap: 8px;
+    }
+
+    .revival-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 0.8rem;
     }
 }
 </style>
@@ -1657,6 +1832,28 @@ footer {
         <div class="browser-filters reveal" id="browserFilters"></div>
         <div class="browser-grid" id="browserGrid"></div>
         <div class="browser-count" id="browserCount"></div>
+    </div>
+</section>
+
+<!-- Revival -->
+<section class="revival" id="revival">
+    <div class="container">
+        <h2 class="section-title reveal">Revival</h2>
+        <p class="revival-sub reveal">Half built ruins yet to be restored.</p>
+        <div class="revival-spotlight reveal" id="revivalSpotlight">
+            <button class="revival-btn" id="revivalPrev" aria-label="Previous revival" title="Previous">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="revival-stage" id="revivalStage">
+                <!-- Slides injected by JS -->
+            </div>
+            <button class="revival-btn" id="revivalNext" aria-label="Next revival" title="Next">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="revival-dots reveal" id="revivalDots">
+            <span class="revival-count" id="revivalCount"></span>
+        </div>
     </div>
 </section>
 
@@ -1808,11 +2005,12 @@ const portfolioData = {
         },
         {
             name: "Simple Game V3",
-            description: "The sequel with a storyline, improved game design, and a real purpose in the game.",
+            description: "A singleplayer story game — but low chance of happening, since the concept orbits dangerously close to an old inspiration and would need careful rethinking before it's worth doing.",
             tags: ["Canvas", "2D", "Story", "Shooter"],
             url: ROOT_PATH + "legacy/games/simple games/simple game v3/index.html",
             legacy: true,
             revival: "planned",
+            revivalOrder: 5,
             icon: "star",
             category: "Games"
         },
@@ -1886,11 +2084,12 @@ const portfolioData = {
         },
         {
             name: "YORG",
-            description: "Experimental browser game — node placement on a grid with a custom cursor and UI.",
-            tags: ["HTML", "Canvas", "Game"],
+            description: "Hand-coded in Rust — a factory game × tower defense with its own lore, a sandbox sibling of Equilibrium. The factory half is the active work.",
+            tags: ["Rust", "WASM", "Tower Defense", "Factory", "Game"],
             url: ROOT_PATH + "legacy/games/yorg/game.html",
             legacy: true,
             revival: "planned",
+            revivalOrder: 1,
             icon: "gamepad",
             category: "Games"
         },
@@ -1997,11 +2196,12 @@ const portfolioData = {
         },
         {
             name: "Pirate Ship Sim",
-            description: "3D pirate ship simulation with vertex-based water waves and wireframe toggle in Three.js.",
-            tags: ["Three.js", "WebGL", "3D", "Simulation", "Water"],
+            description: "Returning as a full open-world naval sandbox — build your ship, go fishing, run cargo contracts, hire a crew, and outgun pirates. The ocean to Flight Sim's sky.",
+            tags: ["Three.js", "WebGL", "3D", "Open World", "Naval"],
             url: ROOT_PATH + "visualisations/pirate/index.html",
             icon: "ship",
             revival: "planned",
+            revivalOrder: 2,
             category: "3D"
         },
         {
@@ -2022,15 +2222,26 @@ const portfolioData = {
         },
         {
             name: "3D Box Net Generator",
-            description: "3D box modeler that generates a 2D folding net from custom width, height, and depth using Three.js.",
+            description: "Returning as netbuilder — a papercraft design tool: model in 3D, unfold a printable 2D net, print it, and fold the thing on your screen into something real in your hands.",
             tags: ["Three.js", "SVG", "3D", "Geometry", "Tool"],
             url: ROOT_PATH + "tools/netbuilder_3D/index.html",
             icon: "box-open",
             revival: "planned",
+            revivalOrder: 4,
             category: "3D"
         },
 
         // ── Tools & Utilities ──
+        {
+            name: "Markdown Formatter",
+            description: "From-scratch markdown parser + multi-format renderer — paste AI-dumped text that's technically markdown but shows up as raw asterisks, get clean html, text, ansi, or normalised markdown. Zero-dependency ES modules.",
+            tags: ["Markdown", "Parser", "Tool", "ES Modules"],
+            url: "https://aigsniperyt.github.io/md-format/",
+            repoUrl: "https://github.com/AIGsniperYt/md-format",
+            icon: "hashtag",
+            flagship: true,
+            category: "Tools"
+        },
         {
             name: "Lite Code Viewer",
             description: "Browse any project's source with syntax highlighting — used to open the code of legacy & deprecated projects.",
@@ -2185,13 +2396,14 @@ const portfolioData = {
         },
         {
             name: "Autonomous Car",
-            description: "Self-driving car simulation with sensor-based obstacle avoidance.",
+            description: "Someday vision: point a finger and a real RC car drives there — 3D sensing and control for the physical world.",
             tags: ["Canvas", "Simulation", "AI", "Autonomous"],
             url: ROOT_PATH + "visualisations/autocar/index.html",
             codeViewer: ROOT_PATH + "tools/lite-code-viewer/index.html?files=visualisations%2Fautocar%2Findex.html,visualisations%2Fautocar%2Fapp.js&title=Autonomous%20Car",
             icon: "car",
             deprecated: true,
             revival: "planned",
+            revivalOrder: 6,
             category: "Visualizations"
         },
         {
@@ -2239,11 +2451,12 @@ const portfolioData = {
         },
         {
             name: "Gunr",
-            description: "Proof-of-concept multiplayer attempt — the seed that became the full multiplayer system.",
-            tags: ["Node", "WebSocket", "Multiplayer", "PoC"],
+            description: "Skill-based online space dueler — you are the ship, choosing perks and abilities, winning on tactics. Inspired by old favourites, deliberately steering clear of just being a starblast clone.",
+            tags: ["WebSocket", "Multiplayer", "Skill", "Space", "Game"],
             url: ROOT_PATH + "legacy/games/gunr/index.html",
             legacy: true,
             revival: "planned",
+            revivalOrder: 3,
             icon: "comments",
             category: "Communication"
         },
@@ -2301,14 +2514,15 @@ const portfolioData = {
         },
         {
             name: "Comms Client",
-            description: "Animated neural network / node visualisation with floating connected nodes and a hidden text input.",
+            description: "Online messaging with anyone, anywhere. The need faded as I grew up — practically bottom of the list, but maybe someday.",
             tags: ["Canvas", "Animation", "Visualisation"],
             url: ROOT_PATH + "deprecated/comms client/index.html",
             codeViewer: ROOT_PATH + "tools/lite-code-viewer/index.html?files=deprecated%2Fcomms%20client%2Findex.html,deprecated%2Fcomms%20client%2Fscript.js,deprecated%2Fcomms%20client%2Fstyles.css&title=Comms%20Client",
             icon: "share-nodes",
             category: "Deprecated",
             deprecated: true,
-            revival: "planned"
+            revival: "planned",
+            revivalOrder: 7
         },
         {
             name: "Multiplayer (Socket.IO)",
@@ -3064,6 +3278,71 @@ function renderFeatured() {
 renderFeatured();
 
 /* ============================================================
+   REVIVAL (one-by-one spotlight of projects coming back)
+   ============================================================ */
+function renderRevival() {
+    const stage = document.getElementById('revivalStage');
+    const prev = document.getElementById('revivalPrev');
+    const next = document.getElementById('revivalNext');
+    const dotsEl = document.getElementById('revivalDots');
+    const countEl = document.getElementById('revivalCount');
+    const projects = portfolioData.catalogue
+        .filter(p => p.revival)
+        .sort((a, b) => (a.revivalOrder ?? Infinity) - (b.revivalOrder ?? Infinity));
+    if (!stage || !projects.length) return;
+
+    stage.innerHTML = projects.map((p, i) => `
+        <a href="${p.url}" target="_blank" class="revival-slide${i === 0 ? ' active' : ''}" style="text-decoration:none;color:inherit">
+            <div class="revival-slide-head">
+                <div class="revival-slide-icon">${iconHTML(p.icon)}</div>
+                <h3 class="revival-slide-title">${p.name}</h3>
+            </div>
+            <p class="revival-slide-desc">${p.description}</p>
+            <div class="revival-slide-tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
+        </a>`).join('');
+
+    const slides = stage.querySelectorAll('.revival-slide');
+    const total = projects.length;
+    let current = 0;
+
+    const show = (i) => {
+        current = (i + total) % total;
+        slides.forEach((s, idx) => s.classList.toggle('active', idx === current));
+        if (dotsEl) dotsEl.querySelectorAll('.revival-dot').forEach((d, idx) => d.classList.toggle('active', idx === current));
+        if (countEl) countEl.textContent = `${current + 1} / ${total}`;
+    };
+
+    if (prev) prev.addEventListener('click', () => show(current - 1));
+    if (next) next.addEventListener('click', () => show(current + 1));
+
+    if (dotsEl) {
+        dotsEl.innerHTML = projects.map((p, i) =>
+            `<button class="revival-dot${i === 0 ? ' active' : ''}" data-i="${i}" aria-label="Go to ${p.name}"></button>`
+        ).join('');
+        dotsEl.querySelectorAll('.revival-dot').forEach(d => {
+            d.addEventListener('click', () => show(Number(d.dataset.i)));
+        });
+    }
+    if (countEl) countEl.textContent = `1 / ${total}`;
+
+    requestAnimationFrame(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        ['revivalSpotlight', 'revivalDots'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
+    });
+}
+renderRevival();
+
+/* ============================================================
    PROJECT BROWSER (catalogue with category filters)
    ============================================================ */
 function renderBrowser() {
@@ -3097,7 +3376,7 @@ function renderBrowser() {
         }
         filtered = filtered.slice().sort((a, b) => statusRank(a) - statusRank(b) || a.name.localeCompare(b.name));
         gridEl.innerHTML = filtered.map((p, i) => `
-            <div class="browser-card" style="transition-delay:${i * 0.03}s"${p.versions ? ` data-url="${p.url}"` : ''}>
+            <div class="browser-card"${p.versions ? ` data-url="${p.url}"` : ''}>
                 <a href="${p.url}" target="_blank" class="browser-card-main" style="display:flex;align-items:center;gap:14px;flex:1;min-width:0;text-decoration:none;color:inherit">
                     <div class="browser-card-icon">${iconHTML(p.icon)}</div>
                     <div class="browser-card-info">
@@ -3129,10 +3408,12 @@ function renderBrowser() {
 
         requestAnimationFrame(() => {
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
+                entries.forEach((entry, i) => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }, i * 60);
                     }
                 });
             }, { threshold: 0.1 });
