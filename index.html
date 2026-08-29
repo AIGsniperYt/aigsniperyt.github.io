@@ -1398,31 +1398,26 @@ html.theme-switching *::after {
 
 .revival-stage {
     flex: 1;
-    display: grid;
     overflow: hidden;
 }
 
+.revival-track {
+    display: flex;
+    width: 100%;
+    will-change: transform;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .revival-slide {
-    grid-area: 1 / 1;
+    flex: 0 0 100%;
+    min-width: 100%;
     display: flex;
     flex-direction: column;
     gap: 16px;
     padding: 30px 32px;
     background: var(--card-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
     border-radius: 18px;
-    opacity: 0;
-    transform: translateY(18px);
-    pointer-events: none;
-    transition: opacity 0.45s ease, transform 0.45s ease;
-}
-
-.revival-slide.active {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
 }
 
 .revival-slide-head {
@@ -1507,6 +1502,77 @@ html.theme-switching *::after {
     width: 24px;
     border-radius: 100px;
     box-shadow: 0 0 10px var(--emerald-glow);
+}
+
+/* ── Tools launcher ── */
+.tools {
+    padding: 20px 0 40px;
+}
+
+.tools-sub {
+    text-align: center;
+    color: var(--text-soft);
+    margin: -32px 0 36px;
+    font-size: 0.95rem;
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 16px;
+    max-width: 460px;
+    margin: 0 auto;
+}
+
+.tools-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.tools-tile.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tools-tile-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 68px;
+    height: 68px;
+    font-size: 1.5rem;
+    color: var(--emerald);
+    background: linear-gradient(145deg, rgba(var(--emerald-rgb), 0.16), rgba(var(--emerald-rgb), 0.04));
+    border: 1px solid rgba(var(--emerald-rgb), 0.28);
+    border-radius: 20px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 6px 18px rgba(0, 0, 0, 0.25);
+    transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.tools-tile:hover .tools-tile-icon {
+    transform: translateY(-4px) scale(1.04);
+    border-color: var(--emerald);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 10px 26px var(--emerald-glow);
+}
+
+.tools-tile-name {
+    font-size: 0.74rem;
+    color: var(--text-soft);
+    text-align: center;
+    line-height: 1.2;
+    max-width: 100%;
+}
+
+.tools-tile-status {
+    display: inline-flex;
+    min-height: 15px;
 }
 
 /* ── About ── */
@@ -1813,6 +1879,17 @@ footer {
         <h2 class="section-title reveal">Featured Projects</h2>
         <div class="project-grid" id="projectGrid">
             <!-- Cards injected by JS -->
+        </div>
+    </div>
+</section>
+
+<!-- Tools launcher -->
+<section class="tools" id="tools">
+    <div class="container">
+        <h2 class="section-title reveal">Tools</h2>
+        <p class="tools-sub reveal">Quickly access useful tools I use</p>
+        <div class="tools-grid reveal" id="toolsGrid">
+            <!-- Tiles injected by JS -->
         </div>
     </div>
 </section>
@@ -2195,7 +2272,7 @@ const portfolioData = {
             category: "3D"
         },
         {
-            name: "Pirate Ship Sim",
+            name: "Openwater",
             description: "Returning as a full open-world naval sandbox — build your ship, go fishing, run cargo contracts, hire a crew, and outgun pirates. The ocean to Flight Sim's sky.",
             tags: ["Three.js", "WebGL", "3D", "Open World", "Naval"],
             url: ROOT_PATH + "visualisations/pirate/index.html",
@@ -2226,6 +2303,7 @@ const portfolioData = {
             tags: ["Three.js", "SVG", "3D", "Geometry", "Tool"],
             url: ROOT_PATH + "tools/netbuilder_3D/index.html",
             icon: "box-open",
+            deprecated: true,
             revival: "planned",
             revivalOrder: 4,
             category: "3D"
@@ -2240,7 +2318,8 @@ const portfolioData = {
             repoUrl: "https://github.com/AIGsniperYt/md-format",
             icon: "hashtag",
             flagship: true,
-            category: "Tools"
+            category: "Tools",
+            quick: true
         },
         {
             name: "Lite Code Viewer",
@@ -2248,7 +2327,8 @@ const portfolioData = {
             tags: ["Tool", "Viewer", "Utility"],
             url: ROOT_PATH + "tools/lite-code-viewer/index.html",
             icon: "code",
-            category: "Tools"
+            category: "Tools",
+            quick: true
         },
         {
             name: "Online Paint",
@@ -2256,7 +2336,8 @@ const portfolioData = {
             tags: ["Canvas", "Drawing", "Tool"],
             url: ROOT_PATH + "tools/paint/paint.html",
             icon: "paint-brush",
-            category: "Tools"
+            category: "Tools",
+            quick: true
         },
         {
             name: "Cipher Slayer",
@@ -2273,7 +2354,8 @@ const portfolioData = {
             tags: ["Diff", "Tool", "Developer"],
             url: ROOT_PATH + "tools/comparison/index.html",
             icon: "code-branch",
-            category: "Tools"
+            category: "Tools",
+            quick: true
         },
         {
             name: "Quote Generator",
@@ -2291,7 +2373,8 @@ const portfolioData = {
             url: ROOT_PATH + "tools/tracker/tracker.html",
             icon: "clipboard-list",
             flagship: true,
-            category: "Tools"
+            category: "Tools",
+            quick: true
         },
         {
             name: "Pixel Art Snipper",
@@ -2299,7 +2382,8 @@ const portfolioData = {
             tags: ["Image Editing", "Tool", "Canvas"],
             url: ROOT_PATH + "tools/snipping tool/index.html",
             icon: "scissors",
-            category: "Tools"
+            category: "Tools",
+            quick: true
         },
         {
             name: "Mini Code Editor",
@@ -3278,6 +3362,46 @@ function renderFeatured() {
 renderFeatured();
 
 /* ============================================================
+   TOOLS (quick-access launcher grid)
+   ============================================================ */
+function renderTools() {
+    const grid = document.getElementById('toolsGrid');
+    const tools = portfolioData.catalogue
+        .filter(p => p.quick)
+        .slice()
+        .sort((a, b) => (a.flagship ? 0 : 1) - (b.flagship ? 0 : 1) || a.name.localeCompare(b.name));
+    if (!grid || !tools.length) return;
+
+    grid.innerHTML = tools.map(p => {
+        const status = p.deprecated
+            ? '<span class="dep-badge">deprecated</span>'
+            : p.legacy
+                ? '<span class="leg-badge">legacy</span>'
+                : p.revival
+                    ? '<span class="rev-badge"><i class="fa-solid fa-seedling"></i> revival planned</span>'
+                    : '';
+        return `
+        <a href="${p.url}" target="_blank" class="tools-tile" title="${p.name}" aria-label="${p.name}">
+            <span class="tools-tile-icon">${iconHTML(p.icon)}</span>
+            <span class="tools-tile-name">${p.name}</span>
+            ${status ? `<span class="tools-tile-status">${status}</span>` : ''}
+        </a>`;
+    }).join('');
+
+    requestAnimationFrame(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 30);
+                }
+            });
+        }, { threshold: 0.1 });
+        grid.querySelectorAll('.tools-tile').forEach(tile => observer.observe(tile));
+    });
+}
+renderTools();
+
+/* ============================================================
    REVIVAL (one-by-one spotlight of projects coming back)
    ============================================================ */
 function renderRevival() {
@@ -3291,39 +3415,73 @@ function renderRevival() {
         .sort((a, b) => (a.revivalOrder ?? Infinity) - (b.revivalOrder ?? Infinity));
     if (!stage || !projects.length) return;
 
-    stage.innerHTML = projects.map((p, i) => `
-        <a href="${p.url}" target="_blank" class="revival-slide${i === 0 ? ' active' : ''}" style="text-decoration:none;color:inherit">
+    stage.innerHTML = `<div class="revival-track" id="revivalTrack">${[...projects, projects[0]].map((p, i) => `
+        <a href="${p.url}" target="_blank" class="revival-slide" style="text-decoration:none;color:inherit">
             <div class="revival-slide-head">
                 <div class="revival-slide-icon">${iconHTML(p.icon)}</div>
                 <h3 class="revival-slide-title">${p.name}</h3>
             </div>
             <p class="revival-slide-desc">${p.description}</p>
             <div class="revival-slide-tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
-        </a>`).join('');
+        </a>`).join('')}</div>`;
 
-    const slides = stage.querySelectorAll('.revival-slide');
+    const track = stage.querySelector('.revival-track');
     const total = projects.length;
     let current = 0;
+    const realOf = () => current % total;
 
-    const show = (i) => {
-        current = (i + total) % total;
-        slides.forEach((s, idx) => s.classList.toggle('active', idx === current));
-        if (dotsEl) dotsEl.querySelectorAll('.revival-dot').forEach((d, idx) => d.classList.toggle('active', idx === current));
-        if (countEl) countEl.textContent = `${current + 1} / ${total}`;
+    const updateIndicators = () => {
+        const real = realOf();
+        if (dotsEl) dotsEl.querySelectorAll('.revival-dot').forEach((d, idx) => d.classList.toggle('active', idx === real));
+        if (countEl) countEl.textContent = `${real + 1} / ${total}`;
     };
 
-    if (prev) prev.addEventListener('click', () => show(current - 1));
-    if (next) next.addEventListener('click', () => show(current + 1));
+    const goTo = (domPos) => {
+        current = domPos;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        updateIndicators();
+    };
+
+    const warp = (domPos) => {
+        track.style.transition = 'none';
+        goTo(domPos);
+        void track.offsetWidth;
+        track.style.transition = '';
+    };
+
+    const step = (dir) => {
+        let next = current + dir;
+        if (dir > 0 && next > total) {
+            warp(0);
+            next = 1;
+        } else if (dir < 0 && next < 0) {
+            warp(total);
+            next = total - 1;
+        }
+        goTo(next);
+    };
+
+    const go = (targetReal) => {
+        const cur = realOf();
+        if (targetReal === cur) return;
+        let d = (targetReal - cur + total) % total;
+        const fwd = d * 2 <= total;
+        const steps = fwd ? d : total - d;
+        for (let s = 0; s < steps; s++) step(fwd ? 1 : -1);
+    };
+
+    if (prev) prev.addEventListener('click', () => step(-1));
+    if (next) next.addEventListener('click', () => step(1));
 
     if (dotsEl) {
         dotsEl.innerHTML = projects.map((p, i) =>
             `<button class="revival-dot${i === 0 ? ' active' : ''}" data-i="${i}" aria-label="Go to ${p.name}"></button>`
         ).join('');
         dotsEl.querySelectorAll('.revival-dot').forEach(d => {
-            d.addEventListener('click', () => show(Number(d.dataset.i)));
+            d.addEventListener('click', () => go(Number(d.dataset.i)));
         });
     }
-    if (countEl) countEl.textContent = `1 / ${total}`;
+    updateIndicators();
 
     requestAnimationFrame(() => {
         const observer = new IntersectionObserver((entries) => {
