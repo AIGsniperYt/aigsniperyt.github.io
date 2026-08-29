@@ -1794,12 +1794,29 @@ height: 100vh;
     }
 
     .browser-filters {
-        gap: 6px;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        gap: 8px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+        padding: 2px 6px 6px;
+        margin-bottom: 32px;
+        mask-image: linear-gradient(to right, transparent, #000 16px, #000 calc(100% - 16px), transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 16px, #000 calc(100% - 16px), transparent);
+    }
+
+    .browser-filters::-webkit-scrollbar {
+        display: none;
     }
 
     .filter-btn {
+        flex-shrink: 0;
+        white-space: nowrap;
+        scroll-snap-align: start;
         font-size: 0.8rem;
-        padding: 6px 14px;
+        padding: 7px 16px;
     }
 
     .section-title {
