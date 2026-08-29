@@ -856,6 +856,7 @@ html.theme-switching *::after {
 /* ── Hero ── */
 .hero {
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1749,7 +1750,9 @@ footer {
         align-items: center;
         justify-content: center;
         gap: 22px;
-        height: 100vh;
+height: 100vh;
+        height: 100dvh;
+        overflow-y: auto;
         background: var(--card-bg);
         backdrop-filter: blur(24px);
         -webkit-backdrop-filter: blur(24px);
