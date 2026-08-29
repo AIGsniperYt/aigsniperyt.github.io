@@ -776,6 +776,42 @@ header .container {
     width: 100%;
 }
 
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 42px;
+    height: 42px;
+    padding: 10px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--text-soft);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-toggle.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
 .theme-toggle {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
@@ -1699,8 +1735,42 @@ footer {
         font-size: 1rem;
     }
 
+    .nav-toggle {
+        display: flex;
+    }
+
     .nav-links {
-        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1000;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        height: 100vh;
+        background: var(--card-bg);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-12px);
+        transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
+    }
+
+    .nav-links.open {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+
+    .nav-links a {
+        font-size: 1.15rem;
+    }
+
+    body.nav-open {
+        overflow: hidden;
     }
 
     .project-grid {
@@ -1782,6 +1852,9 @@ footer {
             <li><a href="#about">About</a></li>
             <li><button id="themeToggle" class="theme-toggle">Switch Theme</button></li>
         </ul>
+        <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
     </div>
 </header>
 
@@ -2635,6 +2708,39 @@ const portfolioData = {
         }
     ]
 };
+
+/* ============================================================
+   MOBILE NAV TOGGLE
+   ============================================================ */
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.querySelector('.nav-links');
+
+function setMenu(open) {
+    navMenu.classList.toggle('open', open);
+    navToggle.classList.toggle('open', open);
+    document.body.classList.toggle('nav-open', open);
+    navToggle.setAttribute('aria-expanded', open);
+}
+
+if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => setMenu(!navMenu.classList.contains('open')));
+    navMenu.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const id = link.getAttribute('href');
+            const el = id.length > 1 ? document.querySelector(id) : null;
+            if (!el) return;
+            e.preventDefault();
+            setMenu(false);
+            setTimeout(() => {
+                const top = el.getBoundingClientRect().top + window.scrollY - 74;
+                window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+            }, 50);
+        });
+    });
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) setMenu(false);
+    });
+}
 
 /* ============================================================
    HEADER SCROLL EFFECT
