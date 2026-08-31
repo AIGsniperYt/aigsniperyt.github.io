@@ -123,7 +123,7 @@ means an older project slated to come back.
 | Project | Overview | Status |
 | --- | --- | --- |
 | [Chess (Kaiser)](https://aigsniperyt.github.io/kaiser/) | **MAJOR** — Full chess engine: move validation, castling, en passant, genetic-AI weights | |
-| [Neuronet](https://aigsniperyt.github.io/neuronet-frontend/) | **MAJOR** — Local-first knowledge management system (backend + frontend) | |
+| [Neuronet](https://aigsniperyt.github.io/neuronet/) | **MAJOR** — Local-first knowledge management system (backend + frontend) | |
 | [HTML Elements Ref](html/html.html) | Visual showcase of HTML elements with live examples | |
 | [Portfolio Archive](archive/portfolio/v4/index.html) | This site's version history — old, v2, v3, v4 | |
 | [C Lab (Memory Lab)](lab/C/memory_lab.c) | Low-level C experiments. Local only, NOT deployed | |
